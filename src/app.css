@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/vazir-font/27.1.0/font-face.css');
+
+@tailwind utilities;
+@tailwind base;
+@tailwind components;
