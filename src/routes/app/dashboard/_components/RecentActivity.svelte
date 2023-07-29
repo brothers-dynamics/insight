@@ -15,7 +15,7 @@
   });
 </script>
 
-<div class="relative flex gap-2 p-2 px-4 bg-[#fff] rounded overflow-hidden">
+<div class="relative flex gap-2 p-2 px-4 bg-white rounded overflow-hidden">
   <div
     class="absolute -left-8 top-1/2 -translate-y-1/2 aspect-square w-48 rounded-full bg-accent-70"
   />

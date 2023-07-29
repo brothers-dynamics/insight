@@ -3,7 +3,7 @@ const alpha = (clr, val) => Color(clr).alpha(val).rgb().string();
 const lighten = (clr, val) => Color(clr).lighten(val).rgb().string();
 const darken = (clr, val) => Color(clr).darken(val).rgb().string();
 
-const accent = '#0D47A1';
+const accent = '#1A237E';
 
 const shades = {};
 
@@ -35,6 +35,7 @@ export default {
     }
   },
   plugins: [
+    require('@tailwindcss/typography'),
     require('tailwindcss-animated'),
     function ({ addUtilities }) {
       const newUtilities = {};

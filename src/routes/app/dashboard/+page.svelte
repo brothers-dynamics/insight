@@ -151,7 +151,7 @@
   </Section>
 
   <Section
-    class="w-full | lg:w-[calc(33.32%-.665rem)]"
+    class="w-full | lg:w-[calc(33.32%-.665rem)] "
     label="اسناد دیده شده"
     icon={Icon.EyeOutline}
   >
@@ -164,7 +164,7 @@
   </Section>
 
   <Section
-    class="w-full | lg:w-[calc(33.32%-.665rem)]"
+    class="w-full | lg:w-[calc(33.32%-.665rem)] "
     label="نشان شده ها"
     icon={Icon.BookmarksOutline}
   >
@@ -174,7 +174,7 @@
     <DocumentItem bookmarked={true} />
   </Section>
   <Section
-    class="w-full | lg:w-[calc(33.32%-.665rem)]"
+    class="w-full | lg:w-[calc(33.32%-.665rem)] "
     label="اسناد پیشنهادی"
     icon={Icon.BarcodeOutline}
   >

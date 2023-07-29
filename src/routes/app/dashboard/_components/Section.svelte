@@ -9,7 +9,7 @@
 </script>
 
 <div class="flex flex-col gap-4 {clazz || ''}">
-  <div class="flex gap-2 w-fit bg-[#fff] p-2 pl-6 rounded-2xl rounded-tr-none">
+  <div class="flex gap-2 w-fit bg-white p-2 pl-6 rounded-2xl rounded-tr-none">
     <svelte:component this={icon} size="23" />
     <span>{label}</span>
   </div>
