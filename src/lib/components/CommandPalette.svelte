@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
   import { goto } from '$app/navigation';
+
   import * as Icon from 'svelte-ionicons';
 
   import { clickOutside } from '$lib/actions/clickOutside';
@@ -119,17 +121,18 @@
 </script>
 
 <div
-  class="fixed flex flex-col items-center inset-0 p-4 bg-gradient-to-bl from-black/60 to-accent-100/60 backdrop-blur-sm z-50"
+  class="fixed inset-0 z-50 flex flex-col items-center bg-gradient-to-bl from-black/60 to-accent-100/60 p-4 backdrop-blur-sm"
+  transition:fade={{ duration: 100 }}
 >
   <div
-    class="flex flex-col gap-4 bg-gray-100 p-4 text-xs rounded"
+    class="flex flex-col gap-4 rounded bg-gray-100 p-4 text-xs"
     use:clickOutside
     on:clickOutside={() => {
       $commandPalette = false;
     }}
   >
     <input
-      class="bg-white w-[480px] px-3 py-2 outline-none rounded"
+      class="w-[480px] rounded bg-white px-3 py-2 outline-none"
       type="text"
       placeholder="دستور مورد نظر را وارد کنید"
       tabindex="0"
@@ -139,18 +142,18 @@
     <div class="flex flex-col gap-3">
       {#each filteredCommands as command, i (command.id)}
         <button
-          class="group flex gap-1 text-gray-600 outline-none cursor-pointer"
+          class="group flex cursor-pointer gap-1 text-gray-600 outline-none"
           tabindex="0"
           on:click={command.action}
         >
           <Icon.ChevronBack size="15" tabindex="-1" />
           <span
-            class="duration-75 group-hover:text-black group-hover:-translate-x-1 group-focus:text-black group-focus:-translate-x-1"
+            class="duration-75 group-hover:-translate-x-1 group-hover:text-black group-focus:-translate-x-1 group-focus:text-black"
             >{command.label}</span
           >
-          <div class="mr-auto ltr ubu">
+          <div class="ltr ubu mr-auto">
             {#each command.keybinding as key, i}
-              <span class="text-[10px] px-1 py-px rounded bg-gray-200">{key}</span>
+              <span class="rounded bg-gray-200 px-1 py-px text-[10px]">{key}</span>
               {#if i < command.keybinding.length - 1}
                 <span class="px-0.5 pr-1">+</span>
               {/if}

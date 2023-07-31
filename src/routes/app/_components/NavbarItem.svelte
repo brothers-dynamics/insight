@@ -6,6 +6,7 @@
   export let label: string;
   export let icon: ComponentType;
   export let path: string;
+  export let count: number = 0;
 
   export let active: boolean = false;
 
@@ -13,17 +14,20 @@
 </script>
 
 <a
-  class="relative flex items-center gap-2 h-6 py-6 pr-6 overflow-hidden cursor-pointer duration-100"
-  class:text-gray-700={!active}
+  class="relative flex items-center gap-2 h-6 py-5 rounded-3xl outline-none overflow-hidden cursor-pointer duration-75"
+  class:text-gray-500={!active}
   class:text-accent-90={active}
-  class:bg-accent-5={active}
   class:font-bold={active}
-  class:hover:bg-gray-50={!active}
+  class:hover:text-black={!active}
   href={'/app/' + path}
 >
-  {#if active}
-    <div class="absolute right-0 translate-x-1/2 aspect-square w-5 rounded bg-accent-70" />
+  {#if count}
+    <div
+      class="absolute left-0 translate-x-1/2 py-px px-2 rounded-md rounded-tr-none bg-accent-70 text-white text-center text-[11px]"
+    >
+      {count}
+    </div>
   {/if}
-  <svelte:component this={icon} size="20" tabindex="-1" />
+  <svelte:component this={icon} size="18" tabindex="-1" />
   <span>{label}</span>
 </a>
