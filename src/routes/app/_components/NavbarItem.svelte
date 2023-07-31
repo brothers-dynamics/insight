@@ -13,7 +13,7 @@
 </script>
 
 <a
-  class="relative flex items-center gap-2 h-6 py-6 pr-6 rounded-e-3xl overflow-hidden cursor-pointer duration-100"
+  class="relative flex items-center gap-2 h-6 py-6 pr-6 overflow-hidden cursor-pointer duration-100"
   class:text-gray-700={!active}
   class:text-accent-90={active}
   class:bg-accent-5={active}

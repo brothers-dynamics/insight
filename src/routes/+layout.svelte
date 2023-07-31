@@ -7,7 +7,9 @@
   <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 </svelte:head>
 
-<div class="relative flex flex-col w-full min-h-full | md:flex-row">
+<div class="global-wrapper relative flex flex-col w-full min-h-full | md:flex-row">
+  <div class="fixed inset-0 bg-shady -z-50" />
+
   <slot />
 </div>
 

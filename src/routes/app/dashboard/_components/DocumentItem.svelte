@@ -5,7 +5,7 @@
   export let seen = false;
 </script>
 
-<div class="flex flex-col gap-3 text-xs px-3 py-2 bg-white rounded">
+<div class="flex flex-col gap-3 text-xs px-3 py-2 bg-white rounded-default">
   <div class="flex gap-2">
     <Icon.Reader size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
@@ -63,9 +63,7 @@
       <span class="text-[12px]">به اشتراک گذاری</span>
     </button>
     {#if seen}
-      <div class="absolute left-1 bottom-1">
-        <Icon.EyeOutline class="text-gray-400" size="15" />
-      </div>
+      <div class="absolute left-1 bottom-1 text-xs text-gray-400">دیده شده</div>
     {/if}
   </div>
 </div>

@@ -15,14 +15,14 @@
   });
 </script>
 
-<div class="relative flex gap-2 p-2 px-4 bg-white rounded overflow-hidden">
+<div class="relative flex gap-2 p-2 px-4 bg-white rounded-default overflow-hidden">
   <div
-    class="absolute -left-8 top-1/2 -translate-y-1/2 aspect-square w-48 rounded-full bg-accent-70"
+    class="absolute -left-5 top-1/2 -translate-y-1/2 aspect-square w-48 rounded-full bg-accent-70"
   />
   <div class="text-xs">{caption}</div>
   {#if link.label !== ''}
     <a
-      class="text-gray-600 bg-gray-200 text-[10px] flex items-center px-2 rounded cursor-pointer"
+      class="text-gray-600 bg-gray-200 text-[10px] flex items-center px-2 rounded-default cursor-pointer"
       href={link.href}
     >
       ➲ {link.label}

@@ -16,10 +16,16 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
+      borderRadius: {
+        default: '0'
+      },
       colors: {
         accent: {
           ...shades
         }
+      },
+      backgroundImage: {
+        shady: `linear-gradient(${accent}20,rgba(0,0,0,0.02)),url(/images/grid.svg)`
       },
       typography: (theme) => ({
         DEFAULT: {

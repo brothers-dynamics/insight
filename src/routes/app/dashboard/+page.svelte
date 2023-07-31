@@ -60,7 +60,7 @@
     icon={Icon.NotificationsOutline}
   >
     <div class="flex flex-col gap-3">
-      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded">
+      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded-default">
         <div class="flex gap-1">
           <Icon.CheckmarkCircle class="text-green-600" size="20" />
           <div class="text-[#555]">
@@ -79,7 +79,7 @@
         </div>
         <div class="absolute left-3 bottom-2 text-xs text-gray-500">۱ ساعت پیش</div>
       </div>
-      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded">
+      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded-default">
         <div class="flex gap-1">
           <Icon.CloseCircle class="text-rose-600" size="20" />
           <div class="text-[#555]">
@@ -98,7 +98,7 @@
         </div>
         <div class="absolute left-3 bottom-2 text-xs text-gray-500">۱ ساعت پیش</div>
       </div>
-      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded">
+      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded-default">
         <div class="flex gap-1">
           <Icon.ChatbubbleEllipses class="text-blue-600" size="20" />
           <div class="text-[#555]">
@@ -117,7 +117,7 @@
         </div>
         <div class="absolute left-3 bottom-2 text-xs text-gray-500">۱ ساعت پیش</div>
       </div>
-      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded">
+      <div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded-default">
         <div class="flex gap-1">
           <Icon.Receipt class="text-[#FF5722]" size="20" />
           <div class="text-[#555]">

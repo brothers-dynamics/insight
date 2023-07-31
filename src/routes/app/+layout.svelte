@@ -1,12 +1,23 @@
 <script lang="ts">
   import * as Icon from 'svelte-ionicons';
-  import { page } from '$app/stores';
+  import { onMount } from 'svelte';
+  import commandPalette from '$lib/stores/commandPalette';
 
+  import CommandPalette from '$lib/components/CommandPalette.svelte';
   import NavbarItem from './_components/NavbarItem.svelte';
+
+  onMount(() => {
+    document.onkeydown = (event: KeyboardEvent) => {
+      if (event.code === 'F2') {
+        $commandPalette = !$commandPalette;
+        event.preventDefault();
+      }
+    };
+  });
 </script>
 
-<div class="flex flex-col gap-3 w-full bg-white border-l border-dashed | md:w-[250px]">
-  <nav class="relative flex gap-2 h-fit p-4 py-5 border-b border-dashed text-[14px]">
+<div class="flex flex-col gap-3 justify-start pt-8 w-full bg-white/50 | md:w-[250px]">
+  <nav class="relative flex gap-2 p-4 py-5 border-dashed text-[14px]">
     <div class="flex justify-center items-center w-12 h-12 bg-accent-70 text-white rounded-2xl">
       کط
     </div>
@@ -20,22 +31,22 @@
       <Icon.EllipsisVertical size="20" />
     </div>
   </nav>
-  <nav class="flex flex-col grow gap-2 h-fit p-4 py-5 text-[14px]">
-    <NavbarItem label="داشبورد" icon={Icon.Speedometer} path={'dashboard'} />
-    <NavbarItem label="نوشتن" icon={Icon.Receipt} path={'write'} />
-    <NavbarItem label="جستوجو" icon={Icon.SearchCircle} path={'search'} />
-    <NavbarItem label="کتابخانه" icon={Icon.Library} path={'library'} />
-    <NavbarItem label="پیام ها" icon={Icon.ChatbubbleEllipses} path={'messages'} />
-    <NavbarItem label="مدیریت" icon={Icon.Settings} path={'settings'} />
+  <nav class="flex flex-col gap-2 h-fit py-5 text-[14px]">
+    <NavbarItem label="داشبورد" icon={Icon.GridOutline} path={'dashboard'} />
+    <NavbarItem label="نوشتن" icon={Icon.ReceiptOutline} path={'create'} />
+    <NavbarItem label="جستوجو" icon={Icon.SearchCircleOutline} path={'search'} />
+    <NavbarItem label="کتابخانه" icon={Icon.LibraryOutline} path={'library'} />
+    <NavbarItem label="پیام ها" icon={Icon.ChatbubbleEllipsesOutline} path={'messages'} />
+    <NavbarItem label="مدیریت" icon={Icon.SettingsOutline} path={'settings'} />
   </nav>
 </div>
 
 <div
   class="relative grow p-4 w-full max-h-[100vh] overflow-y-auto | sm:p-8 md:w-[calc(100%-250px)]"
 >
-  <div
-    class="fixed inset-0 bg-[linear-gradient(#5E35B120,rgba(0,0,0,0.02)),url(/images/grid.svg)] -z-50"
-  />
+  {#if $commandPalette}
+    <CommandPalette />
+  {/if}
   <slot />
 </div>
 

@@ -2,7 +2,7 @@
   import * as Icon from 'svelte-ionicons';
 </script>
 
-<div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded">
+<div class="relative flex flex-col gap-2 px-3 py-2 text-sm bg-white rounded-default">
   <div class="flex gap-1">
     <Icon.CheckmarkCircle class="text-green-600" size="20" />
     <div class="text-[#555]">

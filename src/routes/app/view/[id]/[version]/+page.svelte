@@ -1,46 +1,78 @@
 <script lang="ts">
   import * as Icon from 'svelte-ionicons';
 
-  export let data;
+  import VersionSelector from './_components/VersionSelector.svelte';
 </script>
 
-<div class="flex gap-5 min-h-full">
-  <div class="flex grow p-6 text-justify min-h-full bg-white rounded shadow-xl shadow-slate-700/10">
-    <div class="flex flex-col gap-4 w-96 text-sm bg-white rounded">
+<div class="flex flex-col gap-5 min-h-full | xl:flex-row">
+  <div
+    class="flex flex-col grow p-6 min-h-full gap-5 bg-white rounded-default shadow-xl shadow-slate-700/10 | xl:flex-row xl:gap-0"
+  >
+    <div class="flex flex-col gap-4 w-full text-sm bg-white rounded-default | md:w-96">
       <div class="flex gap-2">
         <Icon.BookOutline size="20" />
         <span>فهرست مطالب</span>
       </div>
-      <div class="flex flex-col gap-3 text-xs text-accent-60">
-        <a href="#x" class="text-accent-100 font-bold"># دستگاه CNC چیست؟</a>
-        <a href="#x" class="pr-[10px] cursor-pointer hover:text-accent-100">
-          # چگونه دستگاه CNC کار می کند؟
+      <div class="flex flex-col gap-5 text-xs text-accent-60">
+        <a href="#x" class="flex gap-1 text-accent-100 font-bold">
+          <Icon.CaretBack size="15" />
+          <span> دستگاه CNC چیست؟</span></a
+        >
+        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="pr-[10px] cursor-pointer hover:text-accent-100"
-          ># کاربردهای دستگاه CNC</a
+        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> کاربردهای دستگاه CNC</span></a
         >
-        <a href="#x" class=" hover:cursor-pointer hover:text-accent-100"># دستگاه CNC چیست؟</a>
-        <a href="#x" class="pr-[10px] cursor-pointer hover:text-accent-100">
-          # چگونه دستگاه CNC کار می کند؟
+        <a href="#x" class="flex gap-1 hover:cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> دستگاه CNC چیست؟</span></a
+        >
+        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="pr-[20px] cursor-pointer hover:text-accent-100"
-          ># کاربردهای دستگاه CNC</a
+        <a href="#x" class="flex gap-1 pr-[40px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> کاربردهای دستگاه CNC</span></a
         >
-        <a href="#x" class="pr-[20px] cursor-pointer hover:text-accent-100"
-          ># کاربردهای دستگاه CNC</a
+        <a href="#x" class="flex gap-1 pr-[40px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> کاربردهای دستگاه CNC</span></a
         >
-        <a href="#x" class=" hover:cursor-pointer hover:text-accent-100"># دستگاه CNC چیست؟</a>
-        <a href="#x" class="pr-[10px] cursor-pointer hover:text-accent-100">
-          # چگونه دستگاه CNC کار می کند؟
+        <a href="#x" class="flex gap-1 hover:cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> دستگاه CNC چیست؟</span></a
+        >
+        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="pr-[10px] cursor-pointer hover:text-accent-100"
-          ># کاربردهای دستگاه CNC</a
-        >
+        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+          <Icon.CaretBack size="15" />
+          <span> کاربردهای دستگاه CNC</span>
+        </a>
       </div>
     </div>
-    <div class="flex flex-col gap-2 grow border-r border-dashed">
-      <!-- <div class="relative flex flex-row-reverse gap-2">Versions</div> -->
-      <article class="p-2 pr-7 prose prose-sm !max-w-[160ch]">
+    <div class="flex flex-col gap-2 grow border-dashed | lg:pr-10 lg:border-r">
+      <div class="relative flex flex-row-reverse h-9">
+        <VersionSelector
+          class="w-full | lg:w-52"
+          list={[
+            { label: 'نسخه نهایی (4) ', value: '4' },
+            { label: 'نسخه 3', value: '3' },
+            { label: 'نسخه 2', value: '2' },
+            { label: 'نسخه 1', value: '1' }
+          ]}
+          selected="4"
+        />
+        <div class="absolute hidden right-0 text-gray-400 text-sm h-9 leading-9 | md:block">
+          شناسه : MAN-0001/4
+        </div>
+      </div>
+      <article class="pt-2 text-justify prose prose-sm !max-w-[160ch] !leading-[1.8rem]">
         <h1>نحوه استفاده از ماشین فرز CNC</h1>
         <p>
           این راهنما شما را در فرآیند استفاده از یک ماشین فرز CNC (کنترل عددی کامپیوتری) همراهی می
@@ -76,15 +108,16 @@
             ماشین CNC برای فرز قطعه کار پیروی می کند. در زیر نمونه ای از یک برنامه ساده CNC وجود
             دارد:
           </p>
-          <pre class="ltr">
-N5 G90 G21
-N10 G0 X0 Y0
-N15 M03 S500
-N20 G1 X30 F100
-N25 G2 X60 Y30 I0 J30
-N30 M05
-N35 G0 X0 Y0
-N40 M02</pre>
+          <pre class="ltr whitespace-pre-line">
+            N5 G90 G21
+            N10 G0 X0 Y0
+            N15 M03 S500
+            N20 G1 X30 F100
+            N25 G2 X60 Y30 I0 J30
+            N30 M05
+            N35 G0 X0 Y0
+            N40 M02
+          </pre>
           <p>
             در بالا، دستوراتی مانند `G90` (حرکت مطلق)، `G21` (معیار میلیمتر)، `G0` (حرکت سریع)، و
             `M03` (شروع چرخش اسپیندل) وجود دارند.
@@ -128,11 +161,67 @@ N40 M02</pre>
           </ul>
         </section>
       </article>
+      <div class="flex flex-col gap-4 mt-auto">
+        <div class="flex flex-wrap gap-2 text-xs">
+          <div
+            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
+          >
+            سند
+          </div>
+          <div
+            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
+          >
+            دستگاه CNC
+          </div>
+          <div
+            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
+          >
+            راهنما
+          </div>
+          <div
+            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
+          >
+            مهم
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-3 text-xs pt-4 border-t border-dashed">
+          <div
+            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+          >
+            <Icon.GitCommitOutline size="15" />
+            <span>ایجاد نسخه جدید</span>
+          </div>
+          <div
+            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+          >
+            <Icon.BookmarkOutline size="15" />
+            <span>نشان کردن</span>
+          </div>
+          <div
+            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+          >
+            <Icon.ShareSocialOutline size="15" />
+            <span>به اشتراک گذاری</span>
+          </div>
+          <div
+            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit lg:pr-2 lg:border-r"
+          >
+            <Icon.CheckmarkCircleOutline size="15" />
+            <span>مطالعه شد</span>
+          </div>
+          <div
+            class="flex gap-1.5 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:mr-auto lg:w-fit"
+          >
+            <Icon.ThumbsUpOutline size="15" />
+            <span>مفید بود</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="flex flex-col gap-3 w-96 text-xs">
+  <div class="flex flex-col gap-3 w-full text-xs | lg:w-96">
     <div
-      class="flex gap-2 items-center bg-white rounded shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
     >
       <div class="p-3 bg-accent-80 text-white">
         <Icon.Person size="20" />
@@ -143,7 +232,7 @@ N40 M02</pre>
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
     >
       <div class="p-3 bg-accent-80 text-white">
         <Icon.Documents size="20" />
@@ -154,7 +243,7 @@ N40 M02</pre>
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
     >
       <div class="p-3 bg-accent-80 text-white">
         <Icon.GitMerge size="20" />
@@ -165,7 +254,7 @@ N40 M02</pre>
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
     >
       <div class="p-3 bg-accent-80 text-white">
         <Icon.CalendarNumber size="20" />
@@ -176,7 +265,7 @@ N40 M02</pre>
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
     >
       <div class="p-3 bg-accent-80 text-white">
         <Icon.CheckmarkCircle size="20" />
