@@ -24,9 +24,9 @@
   }
 </script>
 
-<div class="flex justify-center items-center w-full h-full overflow-hidden">
-  <form class="relative flex flex-col gap-5 w-[20rem] text-sm" on:submit|preventDefault={submit}>
-    <div class="flex flex-col gap-4 items-center">
+<div class="flex w-full items-center justify-center overflow-hidden">
+  <form class="relative flex w-[20rem] flex-col gap-5 text-sm" on:submit|preventDefault={submit}>
+    <div class="flex flex-col items-center gap-4">
       <svg
         width="64"
         height="64"
@@ -56,8 +56,8 @@
           <clipPath id="clip0_234_854"> <rect width="200" height="200" fill="white" /> </clipPath>
         </defs>
       </svg>
-      <b class="text-2xl space-x-3 font-bold tracking-[5px]">INSIGHT</b>
-      <sub class="-mt-3 mb-4 text-gray-400">Version 1.0</sub>
+      <b class="space-x-3 text-2xl font-bold tracking-[5px] text-black">INSIGHT</b>
+      <sub class="-mt-3 mb-4 text-black/50">Version 1.0</sub>
     </div>
     <CredentialInput
       placeholder="نام کاربری"
@@ -73,40 +73,40 @@
       bind:value={password}
     />
     <button
-      class="group relative flex h-10 rounded-b-xl overflow-hidden bg-accent-60 cursor-pointer duration-100 hover:bg-accent-100"
+      class="group relative flex h-10 cursor-pointer overflow-hidden rounded-b-xl bg-accent-60 duration-100 hover:bg-accent-100"
       class:bg-green-700={$state.matches(LoginStates.LoggedIn)}
       class:hover:bg-green-700={$state.matches(LoginStates.LoggedIn)}
     >
-      <div class="absolute left-0 top-0 w-10 h-full">
+      <div class="absolute left-0 top-0 h-full w-10">
         <svelte:component
           this={$state.matches(LoginStates.LoggedIn) ? Icon.Checkmark : Icon.ArrowForward}
           class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 duration-200 group-active:scale-75"
           tabindex="-1"
         />
       </div>
-      <div class="items-center grow h-full text-left px-4 font-semibold load">
+      <div class="load h-full grow items-center px-4 text-left font-semibold">
         {#if $state.matches(LoginStates.LoggedIn)}
-          <div class="h-full leading-10 text-center">ورود موفقیت آمیز</div>
+          <div class="h-full text-center leading-10">ورود موفقیت آمیز</div>
         {:else if $state.matches(LoginStates.LoggingIn)}
-          <div class="flex gap-1 justify-center items-center h-full">
+          <div class="flex h-full items-center justify-center gap-1">
             <Icon.Ellipse
-              class="animate-jump animate-infinite animate-duration-[600ms] animate-delay-100 animate-fill-both"
+              class="animate-jump animate-delay-100 animate-duration-[600ms] animate-fill-both animate-infinite"
               tabindex="-1"
               size="10"
             />
             <Icon.Ellipse
-              class="animate-jump animate-infinite animate-duration-[600ms] animate-delay-200 animate-fill-both"
+              class="animate-jump animate-delay-200 animate-duration-[600ms] animate-fill-both animate-infinite"
               tabindex="-1"
               size="10"
             />
             <Icon.Ellipse
-              class="animate-jump animate-infinite animate-duration-[600ms] animate-delay-300 animate-fill-both"
+              class="animate-jump animate-delay-300 animate-duration-[600ms] animate-fill-both animate-infinite"
               tabindex="-1"
               size="10"
             />
           </div>
         {:else}
-          <div class="h-full leading-10 text-center">ورود</div>
+          <div class="h-full text-center leading-10">ورود</div>
         {/if}
       </div>
     </button>
@@ -115,7 +115,7 @@
 
 <style>
   :global(body) {
-    @apply bg-[#111];
     @apply text-[#eee];
+    @apply w-full;
   }
 </style>

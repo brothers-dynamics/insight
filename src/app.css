@@ -10,3 +10,21 @@
     direction: ltr;
   }
 }
+
+.CodeMirror {
+  height: 500px;
+  direction: rtl;
+  text-align: right;
+}
+.CodeMirror-vscrollbar {
+  overflow: hidden;
+}
+.CodeMirror-scroll {
+  overflow: auto !important;
+  padding: 0;
+  min-height: unset;
+}
+pre {
+  direction: rtl;
+  text-align: right;
+}

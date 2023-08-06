@@ -8,7 +8,7 @@
 
   onMount(() => {
     document.onkeydown = (event: KeyboardEvent) => {
-      if (event.code === 'F2') {
+      if (event.code === 'F1') {
         $commandPalette = !$commandPalette;
         event.preventDefault();
       }

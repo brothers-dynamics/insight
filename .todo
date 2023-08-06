@@ -1,0 +1,3 @@
+- All users, upon entering the workshop, are required to open and engage with the Knowledge Management System (KMS) as their first action before starting work. This step is mandatory and applies to all roles within the team. The purpose is to ensure everyone has the most current and accurate information at the start of their workday. Please make sure to review any updates, new information, or tasks assigned through the KMS before proceeding with your daily tasks.
+
+- migrate all custom class definitions to tailwind class merge lib

@@ -1,28 +1,28 @@
 <script lang="ts">
   import * as Icon from 'svelte-ionicons';
 
-  import VersionSelector from './_components/VersionSelector.svelte';
+  import InputSelector from '$lib/components/form/InputSelector.svelte';
 </script>
 
-<div class="flex flex-col gap-5 min-h-full | xl:flex-row">
+<div class="flex min-h-full flex-col gap-5 xl:flex-row">
   <div
-    class="flex flex-col grow p-6 min-h-full gap-5 bg-white rounded-default shadow-xl shadow-slate-700/10 | xl:flex-row xl:gap-0"
+    class="flex min-h-full grow flex-col gap-5 rounded-default bg-white p-6 shadow-xl shadow-slate-700/10 xl:flex-row xl:gap-0"
   >
-    <div class="flex flex-col gap-4 w-full text-sm bg-white rounded-default | md:w-96">
+    <div class="flex w-full flex-col gap-4 rounded-default bg-white text-sm md:w-96">
       <div class="flex gap-2">
         <Icon.BookOutline size="20" />
         <span>فهرست مطالب</span>
       </div>
       <div class="flex flex-col gap-5 text-xs text-accent-60">
-        <a href="#x" class="flex gap-1 text-accent-100 font-bold">
+        <a href="#x" class="flex gap-1 font-bold text-accent-100">
           <Icon.CaretBack size="15" />
           <span> دستگاه CNC چیست؟</span></a
         >
-        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[20px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[20px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> کاربردهای دستگاه CNC</span></a
         >
@@ -30,15 +30,15 @@
           <Icon.CaretBack size="15" />
           <span> دستگاه CNC چیست؟</span></a
         >
-        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[20px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="flex gap-1 pr-[40px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[40px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> کاربردهای دستگاه CNC</span></a
         >
-        <a href="#x" class="flex gap-1 pr-[40px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[40px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> کاربردهای دستگاه CNC</span></a
         >
@@ -46,20 +46,21 @@
           <Icon.CaretBack size="15" />
           <span> دستگاه CNC چیست؟</span></a
         >
-        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[20px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> چگونه دستگاه CNC کار می کند؟</span>
         </a>
-        <a href="#x" class="flex gap-1 pr-[20px] cursor-pointer hover:text-accent-100">
+        <a href="#x" class="flex cursor-pointer gap-1 pr-[20px] hover:text-accent-100">
           <Icon.CaretBack size="15" />
           <span> کاربردهای دستگاه CNC</span>
         </a>
       </div>
     </div>
-    <div class="flex flex-col gap-2 grow border-dashed | lg:pr-10 lg:border-r">
-      <div class="relative flex flex-row-reverse h-9">
-        <VersionSelector
-          class="w-full | lg:w-52"
+    <div class="flex grow flex-col gap-2 border-dashed lg:border-r lg:pr-10">
+      <div class="relative flex h-9 flex-row-reverse">
+        <InputSelector
+          class="w-full lg:w-52"
+          icon={Icon.GitMerge}
           list={[
             { label: 'نسخه نهایی (4) ', value: '4' },
             { label: 'نسخه 3', value: '3' },
@@ -68,11 +69,11 @@
           ]}
           selected="4"
         />
-        <div class="absolute hidden right-0 text-gray-400 text-sm h-9 leading-9 | md:block">
+        <div class="absolute right-0 hidden h-9 text-sm leading-9 text-gray-400 md:block">
           شناسه : MAN-0001/4
         </div>
       </div>
-      <article class="pt-2 text-justify prose prose-sm !max-w-[160ch] !leading-[1.8rem]">
+      <article class="prose prose-sm !max-w-[160ch] pt-2 text-justify !leading-[1.8rem]">
         <h1>نحوه استفاده از ماشین فرز CNC</h1>
         <p>
           این راهنما شما را در فرآیند استفاده از یک ماشین فرز CNC (کنترل عددی کامپیوتری) همراهی می
@@ -161,56 +162,78 @@
           </ul>
         </section>
       </article>
-      <div class="flex flex-col gap-4 mt-auto">
-        <div class="flex flex-wrap gap-2 text-xs">
-          <div
-            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
-          >
-            سند
+      <div class="mt-auto flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+          <div class="flex w-full flex-wrap gap-2 text-xs lg:w-fit">
+            <div
+              class="cursor-pointer rounded bg-accent-60 px-3 py-1 text-white duration-75 hover:bg-accent-90"
+            >
+              سند
+            </div>
+            <div
+              class="cursor-pointer rounded bg-accent-60 px-3 py-1 text-white duration-75 hover:bg-accent-90"
+            >
+              دستگاه CNC
+            </div>
+            <div
+              class="cursor-pointer rounded bg-accent-60 px-3 py-1 text-white duration-75 hover:bg-accent-90"
+            >
+              راهنما
+            </div>
+            <div
+              class="cursor-pointer rounded bg-accent-60 px-3 py-1 text-white duration-75 hover:bg-accent-90"
+            >
+              مهم
+            </div>
           </div>
-          <div
-            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
-          >
-            دستگاه CNC
-          </div>
-          <div
-            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
-          >
-            راهنما
-          </div>
-          <div
-            class="px-3 py-1 bg-accent-60 text-white rounded duration-75 cursor-pointer hover:bg-accent-90"
-          >
-            مهم
+          <div class="lg:mr-auto flex flex-wrap gap-2 text-xs">
+            <div
+              class="flex cursor-pointer gap-3 rounded border border-dashed border-accent-60 px-3 py-1 text-black/70 duration-75 hover:border-accent-90"
+            >
+              <Icon.GolfOutline size="14" />
+              <span> اپراتور</span>
+            </div>
+            <div
+              class="flex cursor-pointer gap-3 rounded border border-dashed border-accent-60 px-3 py-1 text-black/70 duration-75 hover:border-accent-90"
+            >
+              <Icon.GolfOutline size="14" />
+              <span> طراح</span>
+            </div>
+            <div
+              class="flex cursor-pointer gap-3 rounded border border-dashed border-accent-60 px-3 py-1 text-black/70 duration-75 hover:border-accent-90"
+            >
+              <Icon.GolfOutline size="14" />
+              <span> ناظر</span>
+            </div>
           </div>
         </div>
-        <div class="flex flex-wrap gap-3 text-xs pt-4 border-t border-dashed">
+        <div class="flex flex-wrap gap-3 border-t border-dashed pt-4 text-xs">
           <div
-            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+            class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit"
           >
             <Icon.GitCommitOutline size="15" />
             <span>ایجاد نسخه جدید</span>
           </div>
           <div
-            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+            class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit"
           >
             <Icon.BookmarkOutline size="15" />
             <span>نشان کردن</span>
           </div>
           <div
-            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit"
+            class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit"
           >
             <Icon.ShareSocialOutline size="15" />
             <span>به اشتراک گذاری</span>
           </div>
           <div
-            class="flex gap-1 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:w-fit lg:pr-2 lg:border-r"
+            class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit lg:border-r lg:pr-2"
           >
             <Icon.CheckmarkCircleOutline size="15" />
             <span>مطالعه شد</span>
           </div>
           <div
-            class="flex gap-1.5 w-[calc(50%-0.75rem)] text-gray-600 cursor-pointer duration-100 hover:text-black | lg:mr-auto lg:w-fit"
+            class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1.5 text-gray-600 duration-100 hover:text-black lg:mr-auto lg:w-fit"
           >
             <Icon.ThumbsUpOutline size="15" />
             <span>مفید بود</span>
@@ -219,11 +242,11 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col gap-3 w-full text-xs | lg:w-96">
+  <div class="flex w-full flex-col gap-3 text-xs lg:w-96">
     <div
-      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex items-center gap-2 overflow-hidden rounded-default bg-white shadow-sm shadow-slate-700/10"
     >
-      <div class="p-3 bg-accent-80 text-white">
+      <div class="bg-accent-80 p-3 text-white">
         <Icon.Person size="20" />
       </div>
       <div class="relative flex grow gap-1.5">
@@ -232,9 +255,9 @@
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex items-center gap-2 overflow-hidden rounded-default bg-white shadow-sm shadow-slate-700/10"
     >
-      <div class="p-3 bg-accent-80 text-white">
+      <div class="bg-accent-80 p-3 text-white">
         <Icon.Documents size="20" />
       </div>
       <div class="relative flex grow gap-1.5">
@@ -243,9 +266,9 @@
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex items-center gap-2 overflow-hidden rounded-default bg-white shadow-sm shadow-slate-700/10"
     >
-      <div class="p-3 bg-accent-80 text-white">
+      <div class="bg-accent-80 p-3 text-white">
         <Icon.GitMerge size="20" />
       </div>
       <div class="relative flex grow gap-1.5">
@@ -254,9 +277,9 @@
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex items-center gap-2 overflow-hidden rounded-default bg-white shadow-sm shadow-slate-700/10"
     >
-      <div class="p-3 bg-accent-80 text-white">
+      <div class="bg-accent-80 p-3 text-white">
         <Icon.CalendarNumber size="20" />
       </div>
       <div class="relative flex grow gap-1.5">
@@ -265,9 +288,9 @@
       </div>
     </div>
     <div
-      class="flex gap-2 items-center bg-white rounded-default shadow-sm shadow-slate-700/10 overflow-hidden"
+      class="flex items-center gap-2 overflow-hidden rounded-default bg-white shadow-sm shadow-slate-700/10"
     >
-      <div class="p-3 bg-accent-80 text-white">
+      <div class="bg-accent-80 p-3 text-white">
         <Icon.CheckmarkCircle size="20" />
       </div>
       <div class="relative flex grow gap-1.5">
