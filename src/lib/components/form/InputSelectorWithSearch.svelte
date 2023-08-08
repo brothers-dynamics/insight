@@ -1,16 +1,13 @@
 <script lang="ts">
   import { createEventDispatcher, type ComponentType } from 'svelte';
   import * as Icon from 'svelte-ionicons';
+  import { twMerge } from 'tailwind-merge';
 
   import { clickOutside } from '$lib/actions/clickOutside';
 
   let clazz = '';
   export { clazz as class };
 
-  type ListItem = {
-    label: string;
-    value: string;
-  };
   const enum States {
     OPENED,
     CLOSED
@@ -18,7 +15,7 @@
 
   const dispatch = createEventDispatcher();
 
-  export let list: ListItem[];
+  export let list: Array<{ label: string; value: string }>;
   export let selected: string;
   export let icon: ComponentType;
   let query: string = '';
@@ -46,7 +43,7 @@
   $: filteredList = list.filter((item) => item.label.includes(query));
 </script>
 
-<div class="relative text-xs {clazz || ''}" use:clickOutside on:clickOutside={close}>
+<div class={twMerge('relative text-xs', clazz)} use:clickOutside on:clickOutside={close}>
   <button
     class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
     on:click={toggle}

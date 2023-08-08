@@ -1,6 +1,7 @@
 <script lang="ts">
   import * as Icon from 'svelte-ionicons';
 
+  import Editor from '$lib/components/Editor.svelte';
   import InputText from '$lib/components/form/InputText.svelte';
   import InputTextarea from '$lib/components/form/InputTextarea.svelte';
   import InputTagSelector from '$lib/components/form/InputTagSelector.svelte';
@@ -91,7 +92,7 @@
         </div>
       </div>
       <div class="flex flex-col text-xs">
-        <p>placeholder</p>
+        <Editor />
       </div>
     </div>
     <div class="flex flex-col gap-4">
@@ -106,7 +107,6 @@
         <InputTextarea class="min-h-[100px] lg:w-128" />
       </div>
     </div>
-
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
         <div class="text-black/60">دامنه</div>

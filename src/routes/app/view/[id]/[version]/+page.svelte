@@ -13,7 +13,7 @@
         <Icon.BookOutline size="20" />
         <span>فهرست مطالب</span>
       </div>
-      <div class="flex flex-col gap-5 text-xs text-accent-60">
+      <div class="flex flex-col gap-5 pl-4 text-xs text-accent-60">
         <a href="#x" class="flex gap-1 font-bold text-accent-100">
           <Icon.CaretBack size="15" />
           <span> دستگاه CNC چیست؟</span></a
@@ -186,7 +186,7 @@
               مهم
             </div>
           </div>
-          <div class="lg:mr-auto flex flex-wrap gap-2 text-xs">
+          <div class="flex flex-wrap gap-2 text-xs lg:mr-auto">
             <div
               class="flex cursor-pointer gap-3 rounded border border-dashed border-accent-60 px-3 py-1 text-black/70 duration-75 hover:border-accent-90"
             >
@@ -211,8 +211,8 @@
           <div
             class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit"
           >
-            <Icon.GitCommitOutline size="15" />
-            <span>ایجاد نسخه جدید</span>
+            <Icon.CreateOutline size="15" />
+            <span>ویرایش</span>
           </div>
           <div
             class="flex w-[calc(50%-0.75rem)] cursor-pointer gap-1 text-gray-600 duration-100 hover:text-black lg:w-fit"

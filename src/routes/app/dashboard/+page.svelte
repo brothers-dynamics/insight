@@ -3,7 +3,7 @@
 
   import Section from './_components/Section.svelte';
   import RecentActivity from './_components/RecentActivity.svelte';
-  import DocumentItem from './_components/DocumentItem.svelte';
+  import DocumentItem from '$lib/components/DocumentItem.svelte';
 </script>
 
 <div class="flex flex-wrap gap-4">

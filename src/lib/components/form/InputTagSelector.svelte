@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as Icon from 'svelte-ionicons';
+  import { twMerge } from 'tailwind-merge';
 
   import InputPickWithSuggest from './InputPickWithSuggest.svelte';
 
@@ -9,7 +10,7 @@
 
 <div class="flex flex-col gap-3 text-xs">
   <InputPickWithSuggest
-    class="w-full {clazz || ''}"
+    class={twMerge('w-full', clazz || '')}
     icon={Icon.Pricetag}
     list={[
       { label: 'سند', value: '9' },
@@ -26,7 +27,7 @@
       console.log(x);
     }}
   />
-  <div class="flex gap-2">
+  <div class="flex flex-wrap gap-2">
     <div
       class="flex cursor-pointer items-center gap-1 rounded-xl bg-accent-75 px-2 py-1 text-white opacity-80 hover:opacity-100"
     >

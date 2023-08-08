@@ -7,7 +7,7 @@
   <link rel="icon" href="/favicon.svg" sizes="any" type="image/svg+xml" />
 </svelte:head>
 
-<div class="global-wrapper | relative flex min-h-full w-full flex-col md:flex-row">
+<div class="global-wrapper relative flex min-h-full w-full flex-col md:flex-row">
   <div class="fixed inset-0 -z-50 bg-shady" />
   <slot />
 </div>
@@ -31,6 +31,7 @@
   }
   :global(*::-webkit-scrollbar) {
     width: 4px;
+    height: 4px;
     @apply bg-accent-15;
   }
   :global(*::-webkit-scrollbar-thumb) {

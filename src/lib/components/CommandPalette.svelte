@@ -103,11 +103,12 @@
       }
     },
     {
-      id: 'USER:LOGUT',
+      id: 'USER:LOGOUT',
       label: 'کاربر: خروج',
       keybinding: ['Alt', 'Ctrl', 'L'],
       action: () => {
-        console.log('hi');
+        goto('/login');
+        $commandPalette = false;
       }
     }
   ];

@@ -24,7 +24,7 @@
   }
 </script>
 
-<div class="flex w-full items-center justify-center overflow-hidden">
+<div class="flex w-full items-center justify-center overflow-hidden text-white">
   <form class="relative flex w-[20rem] flex-col gap-5 text-sm" on:submit|preventDefault={submit}>
     <div class="flex flex-col items-center gap-4">
       <svg
@@ -115,7 +115,6 @@
 
 <style>
   :global(body) {
-    @apply text-[#eee];
     @apply w-full;
   }
 </style>

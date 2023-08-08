@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/vazir-font/27.1.0/font-face.css');
 
+@import url('/node_modules/bytemd/dist/index.css');
+
 @tailwind utilities;
 @tailwind base;
 @tailwind components;
@@ -12,19 +14,42 @@
 }
 
 .CodeMirror {
-  height: 500px;
-  direction: rtl;
-  text-align: right;
+  font-family: Vazir !important;
 }
-.CodeMirror-vscrollbar {
-  overflow: hidden;
-}
-.CodeMirror-scroll {
-  overflow: auto !important;
-  padding: 0;
-  min-height: unset;
-}
+
 pre {
   direction: rtl;
   text-align: right;
+}
+
+.bytemd-preview {
+  font-family: Vazir !important;
+}
+.bytemd {
+  height: 500px;
+  z-index: 1;
+}
+.bytemd-status-right label {
+  float: right;
+}
+.bytemd-status-right input {
+  margin: 0 8px 0 0 !important;
+}
+.cm-s-default .cm-header {
+  color: black !important;
+}
+.bytemd .markdown-body {
+  direction: rtl;
+}
+.bytemd .markdown-body ol,
+.bytemd .markdown-body ul {
+  padding-right: inherit;
+}
+.bytemd code {
+  font-family: Vazir;
+}
+.bytemd .markdown-body pre {
+  direction: ltr;
+  text-align: left;
+  font-size: 14px;
 }

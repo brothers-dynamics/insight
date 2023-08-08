@@ -2,6 +2,7 @@
   import { writable } from 'svelte/store';
   import { createEventDispatcher, type ComponentType } from 'svelte';
   import * as Icon from 'svelte-ionicons';
+  import { twMerge } from 'tailwind-merge';
 
   import { clickOutside } from '$lib/actions/clickOutside';
   import { dropdownDirection, DropDirectionType } from '$lib/actions/dropDownDirection';
@@ -11,10 +12,6 @@
   let clazz = '';
   export { clazz as class };
 
-  type ListItem = {
-    label: string;
-    value: string;
-  };
   const enum States {
     OPENED,
     CLOSED
@@ -22,7 +19,7 @@
 
   const dispatch = createEventDispatcher();
 
-  export let list: ListItem[];
+  export let list: Array<{ label: string; value: string }>;
   export let selected: string[] = [];
   export let icon: ComponentType;
 
@@ -40,10 +37,10 @@
 </script>
 
 <div
-  class="relative text-xs {clazz || ''}"
+  class={twMerge('relative text-xs', clazz)}
   use:clickOutside
-  on:clickOutside={close}
   use:dropdownDirection={{ threshold: 300, direction }}
+  on:clickOutside={close}
 >
   <button
     class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
@@ -70,7 +67,7 @@
   </button>
   {#if state === States.OPENED}
     <div
-      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-default border bg-white"
+      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-default border bg-white py-2"
       class:top-full={$direction === DropDirectionType.DOWN}
       class:translate-y-2={$direction === DropDirectionType.DOWN}
       class:bottom-full={$direction === DropDirectionType.UP}

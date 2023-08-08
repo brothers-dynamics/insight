@@ -16,7 +16,7 @@
   });
 </script>
 
-<div class="| flex w-full flex-col justify-start bg-white/50 p-4 md:w-[300px]">
+<div class="flex w-full flex-col justify-start bg-white/50 p-4 md:w-[300px]">
   <nav class="relative flex gap-2 rounded bg-white/70 py-6 pr-8 text-[13px] text-black shadow-sm">
     <div class="flex h-12 w-12 items-center justify-center rounded bg-accent-50 text-white">کط</div>
     <div class="flex flex-col gap-1">
@@ -53,7 +53,7 @@
 </div>
 
 <div
-  class="| relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8 md:w-[calc(100%-250px)]"
+  class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8 md:w-[calc(100%-250px)]"
 >
   {#if $commandPalette}
     <CommandPalette />

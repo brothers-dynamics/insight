@@ -1,7 +1,18 @@
 <script lang="ts">
-  import Editor from '@tinymce/tinymce-svelte';
+  import { Editor } from 'bytemd';
+  import gfm from '@bytemd/plugin-gfm';
+
+  let value: string;
+  const plugins = [
+    gfm()
+    // Add more plugins here
+  ];
+
+  function handleChange(e) {
+    value = e.detail.value;
+  }
 </script>
 
-<div class="prose flex !max-w-full flex-col !text-right">
-  <Editor scriptSrc="tinymce/tinymce.min.js" />
+<div class="ltr prose prose-sm !max-w-full">
+  <Editor {value} {plugins} on:change={handleChange} />
 </div>

@@ -3,14 +3,15 @@
 
   export let bookmarked = false;
   export let seen = false;
+  export let extended = false;
 </script>
 
-<div class="flex flex-col gap-3 text-xs px-3 py-2 bg-white rounded-default">
+<div class="flex flex-col gap-3 rounded-default bg-white px-3 py-2 text-xs">
   <div class="flex gap-2">
     <Icon.Reader size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
     <a
-      class="text-gray-600 bg-gray-200 text-[10px] flex items-center px-2 rounded cursor-pointer"
+      class="flex cursor-pointer items-center rounded bg-gray-200 px-2 text-[10px] text-gray-600"
       href="#"
     >
       ➲ MAN-0001/1
@@ -29,22 +30,22 @@
   </div>
   <div class="flex gap-3">
     <div
-      class="px-3 bg-accent-75 text-white opacity-80 rounded cursor-pointer duration-100 hover:opacity-100"
+      class="cursor-pointer rounded bg-accent-75 px-3 text-white opacity-80 duration-100 hover:opacity-100"
     >
       سند
     </div>
     <div
-      class="px-3 bg-accent-75 text-white opacity-80 rounded cursor-pointer duration-100 hover:opacity-100"
+      class="cursor-pointer rounded bg-accent-75 px-3 text-white opacity-80 duration-100 hover:opacity-100"
     >
       آموزش
     </div>
     <div
-      class="px-3 bg-accent-75 text-white opacity-80 rounded cursor-pointer duration-100 hover:opacity-100"
+      class="cursor-pointer rounded bg-accent-75 px-3 text-white opacity-80 duration-100 hover:opacity-100"
     >
       سیستم
     </div>
   </div>
-  <div class="relative flex gap-3 mt-1">
+  <div class="relative mt-1 flex gap-3">
     <button class="flex gap-1 hover:font-bold">
       <Icon.ChevronForwardCircleOutline size="15" />
       <span class="text-[12px]">نمایش </span>
@@ -63,7 +64,7 @@
       <span class="text-[12px]">به اشتراک گذاری</span>
     </button>
     {#if seen}
-      <div class="absolute left-1 bottom-1 text-xs text-gray-400">دیده شده</div>
+      <div class="absolute bottom-1 left-1 text-xs text-gray-400">دیده شده</div>
     {/if}
   </div>
 </div>
