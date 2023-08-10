@@ -1,9 +1,20 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
+
+  /* Stores */
+  import ShareModalStateManagerStore from '$lib/stores/modalStateManagers/ShareModalStateManagerStore';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   export let bookmarked = false;
   export let seen = false;
-  export let extended = false;
 </script>
 
 <div class="flex flex-col gap-3 rounded-default bg-white px-3 py-2 text-xs">
@@ -12,7 +23,7 @@
     <span class="font-bold">راهنمای استفاده از سیستم</span>
     <a
       class="flex cursor-pointer items-center rounded bg-gray-200 px-2 text-[10px] text-gray-600"
-      href="#"
+      href="/app/view/MAN-0001/1"
     >
       ➲ MAN-0001/1
     </a>
@@ -46,10 +57,10 @@
     </div>
   </div>
   <div class="relative mt-1 flex gap-3">
-    <button class="flex gap-1 hover:font-bold">
+    <a class="flex gap-1 hover:font-bold" href="/app/view/MAN-0001/1">
       <Icon.ChevronForwardCircleOutline size="15" />
       <span class="text-[12px]">نمایش </span>
-    </button>
+    </a>
     <button class="flex gap-1 hover:font-bold">
       {#if bookmarked}
         <Icon.Bookmark class="text-accent-100" size="15" />
@@ -59,12 +70,20 @@
         <span class="text-[12px]">نشان کردن</span>
       {/if}
     </button>
-    <button class="flex gap-1 hover:font-bold">
+    <button
+      class="flex gap-1 hover:font-bold"
+      on:click={() => {
+        ShareModalStateManagerStore.share('12');
+      }}
+    >
       <Icon.ShareSocialOutline size="15" />
       <span class="text-[12px]">به اشتراک گذاری</span>
     </button>
     {#if seen}
-      <div class="absolute bottom-1 left-1 text-xs text-gray-400">دیده شده</div>
+      <Icon.CheckmarkDoneCircleOutline
+        class="absolute bottom-1 left-1 text-xs text-gray-400"
+        size="18"
+      />
     {/if}
   </div>
 </div>

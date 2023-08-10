@@ -1,7 +1,13 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
-  import InputSelector from '$lib/components/form/InputSelector.svelte';
+  /* Components */
+  import SelectorInput from '$lib/components/form/SelectorInput.svelte';
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
@@ -58,7 +64,7 @@
     </div>
     <div class="flex grow flex-col gap-2 border-dashed lg:border-r lg:pr-10">
       <div class="relative flex h-9 flex-row-reverse">
-        <InputSelector
+        <SelectorInput
           class="w-full lg:w-52"
           icon={Icon.GitMerge}
           list={[

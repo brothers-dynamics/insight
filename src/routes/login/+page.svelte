@@ -1,10 +1,24 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import { goto } from '$app/navigation';
+
+  /* 3rd party libraries */
   import { useMachine } from '@xstate/svelte';
   import * as Icon from 'svelte-ionicons';
 
+  /* Components */
   import CredentialInput from './_components/CredentialInput.svelte';
+
+  /* State Machines */
   import { Machine as LoginMachine, States as LoginStates } from './_machines/login';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   const { state, send } = useMachine(LoginMachine);
 

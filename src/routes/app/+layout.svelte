@@ -1,15 +1,30 @@
 <script lang="ts">
-  import * as Icon from 'svelte-ionicons';
-  import { onMount } from 'svelte';
-  import commandPalette from '$lib/stores/commandPalette';
+  /***********************
+   * Dependencies
+   ***********************/
 
-  import CommandPalette from '$lib/components/CommandPalette.svelte';
+  /* Svelte built-in libraries */
+  import { onMount } from 'svelte';
+
+  /* 3rd party libraries */
+  import * as Icon from 'svelte-ionicons';
+
+  /* Stores */
+  import CommandPaletteModalStateManagerStore from '$lib/stores/modalStateManagers/CommandPaletteModalStateManagerStore';
+
+  /* Components */
+  import CommandPaletteModal from '$lib/components/modals/CommandPaletteModal.svelte';
+  import ShareModal from '$lib/components/modals/ShareModal.svelte';
   import NavbarItem from './_components/NavbarItem.svelte';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   onMount(() => {
     document.onkeydown = (event: KeyboardEvent) => {
       if (event.code === 'F1') {
-        $commandPalette = !$commandPalette;
+        CommandPaletteModalStateManagerStore.toggle();
         event.preventDefault();
       }
     };
@@ -52,19 +67,8 @@
   </nav>
 </div>
 
-<div
-  class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8 md:w-[calc(100%-250px)]"
->
-  {#if $commandPalette}
-    <CommandPalette />
-  {/if}
+<div class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8 md:w-[calc(100%-250px)]">
+  <CommandPaletteModal />
+  <ShareModal />
   <slot />
 </div>
-
-<style>
-  :global(body) {
-    width: 100%;
-    background-color: white;
-    color: black;
-  }
-</style>

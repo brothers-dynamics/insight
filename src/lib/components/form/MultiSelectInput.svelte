@@ -1,11 +1,26 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import { writable } from 'svelte/store';
   import { createEventDispatcher, type ComponentType } from 'svelte';
-  import * as Icon from 'svelte-ionicons';
-  import { twMerge } from 'tailwind-merge';
 
-  import { clickOutside } from '$lib/actions/clickOutside';
-  import { dropdownDirection, DropDirectionType } from '$lib/actions/dropDownDirection';
+  /* 3rd party libraries */
+  import * as Icon from 'svelte-ionicons';
+
+  /* Actions */
+  import { outClick } from '$lib/actions/userInteractions/CustomEvents';
+  import {
+    dropdownDirector,
+    DropDirectionType
+  } from '$lib/actions/elementEnhancements/DropDownDirector';
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   let direction = writable(DropDirectionType.DOWN);
 
@@ -37,10 +52,12 @@
 </script>
 
 <div
-  class={twMerge('relative text-xs', clazz)}
-  use:clickOutside
-  use:dropdownDirection={{ threshold: 300, direction }}
-  on:clickOutside={close}
+  class="relative text-xs"
+  use:overClass={clazz}
+  use:outClick={() => {
+    close();
+  }}
+  use:dropdownDirector={{ threshold: 300, direction }}
 >
   <button
     class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
@@ -83,7 +100,9 @@
             if (!selected.includes(item.value)) selected = [...selected, item.value];
             else selected = selected.filter((value) => value !== item.value);
           }}
-          on:keypress={() => {}}
+          on:keypress={() => {
+            'pass';
+          }}
         >
           <div class="flex gap-2">
             <div

@@ -1,5 +1,17 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import type { ComponentType } from 'svelte';
+
+  /* Actions */
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   let clazz: string;
   export { clazz as class };
@@ -8,8 +20,8 @@
   export let icon: ComponentType;
 </script>
 
-<div class="flex flex-col gap-4 {clazz || ''}">
-  <div class="flex gap-2 w-fit bg-white rounded p-2 pl-6">
+<div class="flex flex-col gap-4" use:overClass={clazz}>
+  <div class="flex w-fit gap-2 rounded bg-white p-2 pl-6">
     <svelte:component this={icon} size="23" />
     <span>{label}</span>
   </div>

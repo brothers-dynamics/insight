@@ -1,5 +1,14 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import type { ComponentType } from 'svelte';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   export let placeholder: string;
   export let type = 'text';

@@ -1,6 +1,17 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import { createEventDispatcher, type ComponentType } from 'svelte';
-  import { twMerge } from 'tailwind-merge';
+
+  /* Actions */
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   const dispatch = createEventDispatcher();
 
@@ -21,10 +32,10 @@
   }
 </script>
 
-<div class={twMerge('flex gap-2 py-2 text-xs', clazz)}>
+<div class="flex gap-2 py-2 text-xs" use:overClass={clazz}>
   {#each options as option, i (i)}
     <button
-      class="flex gap-2 rounded-lg px-2 py-1 text-black duration-75"
+      class="flex gap-1 rounded-lg px-2 py-1 text-black duration-75"
       class:bg-accent-80={selected === option.value}
       class:text-white={selected === option.value}
       class:cursor-default={selected === option.value}

@@ -1,15 +1,25 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
   import { twMerge } from 'tailwind-merge';
 
-  import InputPickWithSuggest from './InputPickWithSuggest.svelte';
+  /* Components */
+  import PickWithSuggestInput from './PickWithSuggestInput.svelte';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   let clazz = '';
   export { clazz as class };
 </script>
 
 <div class="flex flex-col gap-3 text-xs">
-  <InputPickWithSuggest
+  <PickWithSuggestInput
     class={twMerge('w-full', clazz || '')}
     icon={Icon.Pricetag}
     list={[

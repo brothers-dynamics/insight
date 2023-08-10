@@ -1,10 +1,23 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* Svelte built-in libraries */
   import { writable } from 'svelte/store';
   import { createEventDispatcher, type ComponentType } from 'svelte';
-  import { twMerge } from 'tailwind-merge';
 
-  import { clickOutside } from '$lib/actions/clickOutside';
-  import { dropdownDirection, DropDirectionType } from '$lib/actions/dropDownDirection';
+  /* Actions */
+  import { outClick } from '$lib/actions/userInteractions/CustomEvents';
+  import {
+    dropdownDirector,
+    DropDirectionType
+  } from '$lib/actions/elementEnhancements/DropDownDirector';
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   let direction = writable(DropDirectionType.DOWN);
 
@@ -38,16 +51,18 @@
     close();
   }
 
-  let filteredList: ListItem[];
+  let filteredList: Array<{ label: string; value: string }>;
 
   $: filteredList = list.filter((item) => item.label.includes(query));
 </script>
 
 <div
-  class={twMerge('relative text-xs', clazz)}
-  use:clickOutside
-  use:dropdownDirection={{ threshold: 300, direction }}
-  on:clickOutside={close}
+  class="relative text-xs"
+  use:overClass={clazz}
+  use:outClick={() => {
+    close();
+  }}
+  use:dropdownDirector={{ threshold: 300, direction }}
 >
   <div
     class="relative flex w-full divide-x divide-x-reverse overflow-hidden rounded-form-elements border bg-white"

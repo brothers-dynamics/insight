@@ -1,27 +1,33 @@
 <script lang="ts">
+  /***********************
+   * Dependencies
+   ***********************/
+
+  /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
-  import InputText from '$lib/components/form/InputText.svelte';
-  import InputSelector from '$lib/components/form/InputSelector.svelte';
-  import InputMultiSelect from '$lib/components/form/InputMultiSelect.svelte';
-  import InputTagSelector from '$lib/components/form/InputTagSelector.svelte';
-  import DocumentItem from '$lib/components/DocumentItem.svelte';
-  import SelectionButtonGroup from '$lib/components/SelectionButtonGroup.svelte';
+  /* Components */
+  import TextInput from '$lib/components/form/TextInput.svelte';
+  import SelectorInput from '$lib/components/form/SelectorInput.svelte';
+  import MultiSelectInput from '$lib/components/form/MultiSelectInput.svelte';
+  import TagSelectorInput from '$lib/components/form/TagSelectorInput.svelte';
+  import DocumentItem from '$lib/components/items/DocumentItem.svelte';
+  import SelectionButtonGroup from '$lib/components/utils/SelectionButtonGroup.svelte';
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
-  <div class="flex h-fit flex-col gap-6 bg-white p-6 text-xs lg:w-1/4">
+  <div class="flex h-fit shrink-0 flex-col gap-6 bg-white p-6 text-xs lg:min-w-[400px]">
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">عنوان سند</div>
       </div>
-      <InputText />
+      <TextInput />
     </div>
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">نوع سند</div>
       </div>
-      <InputSelector
+      <SelectorInput
         icon={Icon.DocumentsOutline}
         list={[
           {
@@ -36,13 +42,13 @@
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">تگ ها</div>
       </div>
-      <InputTagSelector />
+      <TagSelectorInput />
     </div>
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">نویسنده</div>
       </div>
-      <InputSelector
+      <SelectorInput
         icon={Icon.PersonOutline}
         list={[
           {
@@ -58,7 +64,7 @@
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">دامنه</div>
       </div>
-      <InputMultiSelect
+      <MultiSelectInput
         icon={Icon.GolfOutline}
         list={[
           { label: 'اپراتور', value: 'x2' },
@@ -85,15 +91,22 @@
         />
       </div>
     </div>
-    <div class="flex flex-col gap-5 -space-y-4 divide-y">
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
-      <DocumentItem extended />
+    <div class="relative flex flex-col divide-y">
+      {#if false}
+        <div
+          class="absolute inset-0 z-10 flex min-h-[400px] items-center justify-center bg-white/70 backdrop-blur-sm"
+        >
+          <Icon.CloudCircleOutline class="animate-pulse text-gray-700" size="40" />
+        </div>
+      {/if}
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
+      <DocumentItem />
     </div>
     <div class="-mb-2 mt-auto border-t border-dashed pt-4">
       <SelectionButtonGroup

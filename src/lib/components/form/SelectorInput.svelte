@@ -1,9 +1,21 @@
 <script lang="ts">
-  import { createEventDispatcher, type ComponentType } from 'svelte';
-  import * as Icon from 'svelte-ionicons';
-  import { twMerge } from 'tailwind-merge';
+  /***********************
+   * Dependencies
+   ***********************/
 
-  import { clickOutside } from '$lib/actions/clickOutside';
+  /* Svelte built-in libraries */
+  import { createEventDispatcher, type ComponentType } from 'svelte';
+
+  /* 3rd party libraries */
+  import * as Icon from 'svelte-ionicons';
+
+  /* Actions */
+  import { outClick } from '$lib/actions/userInteractions/CustomEvents';
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /***********************
+   * Implementation
+   ***********************/
 
   let clazz = '';
   export { clazz as class };
@@ -38,7 +50,13 @@
   }
 </script>
 
-<div class={twMerge("relative text-xs", clazz)} use:clickOutside on:clickOutside={close}>
+<div
+  class="relative text-xs"
+  use:overClass={clazz}
+  use:outClick={() => {
+    close();
+  }}
+>
   <button
     class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
     on:click={toggle}
