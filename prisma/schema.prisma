@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  username  String
+  password  String
+  firstname String
+  lastname  String
+  active    Boolean @default(true)
+  roles     Role[]
+
+  createdDocuments    Document[] @relation(name: "create")
+  bookmarkedDocuments Document[] @relation(name: "bookmark")
+  readDocuments       Document[] @relation(name: "read")
+  likedDocuments      Document[] @relation(name: "like")
+  approvals           Approval[]
+
+  createdAt DateTime @default(now())
+}
+
+model Role {
+  id         Int          @id @default(autoincrement())
+  name       String
+  privileges Privileges[]
+
+  users            User[]
+  relatedDocuments Document[]
+
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  documents Document[]
+}
+
+model Approval {
+  id         Int      @id @default(autoincrement())
+  document   Document @relation(fields: [documentId], references: [id])
+  documentId Int      @unique
+  approver   User     @relation(fields: [approverId], references: [id])
+  approverId Int
+
+  createdAt DateTime @default(now())
+}
+
+model Document {
+  id       Int          @id @default(autoincrement())
+  code     String
+  version  Int          @default(autoincrement())
+  author   User         @relation(name: "create", fields: [authorId], references: [id])
+  authorId Int
+  type     documentType
+  title    String       @unique
+  domains  Role[]
+  tags     Tag[]
+
+  approval     Approval?
+  bookmarkedBy User[]    @relation(name: "bookmark")
+  readBy       User[]    @relation(name: "read")
+  likedBy      User[]    @relation(name: "like")
+
+  // other types must be added here
+  knowledge Knowledge[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([code, version])
+}
+
+model Knowledge {
+  content String @unique
+  summery String @default("")
+
+  document Document @relation(fields: [documentId], references: [id])
+
+  documentId Int @unique
+}
+
+enum documentType {
+  KNOWLEDGE
+}
+
+enum Privileges {
+  ADMIN
+  CREATE_USER
+  UPDATE_USER
+  CREATE_KNOWLEDGE
+  APPROVE_KNOWLEDGE
+  CREATE_MANUAL
+  APPROVE_MANUAL
+  CREATE_PROCEDURE
+  APPROVE_PROCEDURE
+  CREATE_POLICY
+  APPROVE_POLICY
+  CREATE_TAG
+  UPDATE_TAG
+  CREATE_ROLE
+  UPDATE_ROLE
+}

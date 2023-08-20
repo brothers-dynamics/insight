@@ -1,7 +1,6 @@
 import Color from 'color';
+
 const alpha = (clr, val) => Color(clr).alpha(val).rgb().string();
-const lighten = (clr, val) => Color(clr).lighten(val).rgb().string();
-const darken = (clr, val) => Color(clr).darken(val).rgb().string();
 
 const accent = '#1A237E';
 
@@ -16,6 +15,11 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
+      colors: {
+        accent: {
+          ...shades
+        }
+      },
       spacing: {
         128: '32rem',
         144: '36rem',
@@ -27,11 +31,6 @@ export default {
       borderRadius: {
         default: '0',
         'form-elements': '.7rem'
-      },
-      colors: {
-        accent: {
-          ...shades
-        }
       },
       backgroundImage: {
         shady: `linear-gradient(${accent}20,rgba(0,0,0,0.02)),url(/images/grid.svg)`

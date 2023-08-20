@@ -1,4 +1,6 @@
 <script lang="ts">
+  // TODO: create a input type hidden so i can use this component as form field (i can then use a svelte form action)
+
   /***********************
    * Dependencies
    ***********************/

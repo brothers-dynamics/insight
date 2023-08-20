@@ -13,6 +13,7 @@
   import TagSelectorInput from '$lib/components/form/TagSelectorInput.svelte';
   import DocumentItem from '$lib/components/items/DocumentItem.svelte';
   import SelectionButtonGroup from '$lib/components/utils/SelectionButtonGroup.svelte';
+  import ButtonWithIcon from '$lib/components/form/ButtonWithIcon.svelte';
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
@@ -42,7 +43,19 @@
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">تگ ها</div>
       </div>
-      <TagSelectorInput />
+      <TagSelectorInput
+        list={[
+          { label: 'سند', value: '9' },
+          { label: 'جاوا', value: '8' },
+          { label: 'آموزش', value: '7' },
+          { label: 'راهنما', value: '6' },
+          { label: 'ویژه', value: '5' },
+          { label: 'مهم', value: '4' },
+          { label: 'دستگاه CNC', value: '3' },
+          { label: 'ایمنی', value: '2' },
+          { label: 'ارتباطات', value: '1' }
+        ]}
+      />
     </div>
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
@@ -76,6 +89,11 @@
         selected={['*']}
       />
     </div>
+    <ButtonWithIcon
+      class="w-fit bg-accent-60 px-5 py-2 hover:bg-accent-80"
+      label="جستوجو"
+      icon={Icon.SearchCircleOutline}
+    />
   </div>
   <div class="flex min-h-full grow flex-col gap-3 bg-white p-6">
     <div class="border-b border-dashed p-2 text-sm">

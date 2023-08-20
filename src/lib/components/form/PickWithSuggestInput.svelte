@@ -42,7 +42,7 @@
   function close(): void {
     state = States.CLOSED;
   }
-  function select(this: HTMLDivElement) {
+  function pick(this: HTMLDivElement) {
     let picked = this.getAttribute('data-value') as string;
     dispatch('pick', {
       item: list.find((item) => item.value === picked)
@@ -91,8 +91,8 @@
         {#each filteredList as item}
           <div
             class="cursor-pointer px-2 py-2 hover:bg-accent-50 hover:text-white"
-            on:click={select}
-            on:keypress={select}
+            on:click={pick}
+            on:keypress={pick}
             role="button"
             tabindex="0"
             data-value={item.value}

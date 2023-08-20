@@ -27,7 +27,7 @@
   class:text-accent-90={active}
   class:font-bold={active}
   class:hover:text-black={!active}
-  href={'/app/' + path}
+  href={'/' + path}
 >
   {#if count}
     <div

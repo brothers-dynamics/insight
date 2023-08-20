@@ -143,7 +143,7 @@
       }}
     >
       <input
-        class="w-full rounded bg-white px-3 py-2 outline-none lg:w-[480px]"
+        class="w-full rounded-3xl bg-white px-3 py-2 outline-none lg:w-[480px]"
         type="text"
         placeholder="دستور مورد نظر را وارد کنید"
         tabindex="0"

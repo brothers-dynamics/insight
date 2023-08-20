@@ -14,7 +14,7 @@ import SuperStore from '../SuperStore';
  *
  * @extends {SuperStore}
  */
-class ShareStateManagerStore extends SuperStore<StateType> {
+class ShareModalStateManagerStore extends SuperStore<StateType> {
   /**
    * Create the store with initial state.
    */
@@ -60,4 +60,4 @@ type StateType = {
 /**
  * Exported singleton instance of store.
  */
-export default new ShareStateManagerStore();
+export default new ShareModalStateManagerStore();

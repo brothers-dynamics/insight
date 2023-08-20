@@ -5,25 +5,33 @@
 
   /* Svelte built-in libraries */
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
   /* Stores */
   import CommandPaletteModalStateManagerStore from '$lib/stores/modalStateManagers/CommandPaletteModalStateManagerStore';
+  import LockDownModalStateManagerStore from '$lib/stores/modalStateManagers/LockDownModalStateManagerStore';
 
   /* Components */
   import CommandPaletteModal from '$lib/components/modals/CommandPaletteModal.svelte';
   import ShareModal from '$lib/components/modals/ShareModal.svelte';
+  import LockDownModal from '$lib/components/modals/LockDownModal.svelte';
+
+  import Notifications from '$lib/components/utils/Notifications.svelte';
   import NavbarItem from './_components/NavbarItem.svelte';
 
   /***********************
    * Implementation
    ***********************/
 
+  export let data;
+
   onMount(() => {
     document.onkeydown = (event: KeyboardEvent) => {
-      if (event.code === 'F1') {
+      if ($LockDownModalStateManagerStore.visible) return;
+      if (event.code === 'F2') {
         CommandPaletteModalStateManagerStore.toggle();
         event.preventDefault();
       }
@@ -47,7 +55,7 @@
   <nav class="flex h-fit flex-col py-5 pr-8 text-[13px]">
     <div class="my-4 font-bold">شخصی</div>
     <NavbarItem label="داشبورد" icon={Icon.GridOutline} path={'dashboard'} count={2} />
-    <NavbarItem label="پروفایل" icon={Icon.PersonOutline} path={'profile'} />
+    <NavbarItem label="پیش‌نویس ها" icon={Icon.CreateOutline} path={'drafts'} />
     <NavbarItem label="پیام ها" icon={Icon.ChatbubbleEllipsesOutline} path={'messages'} count={6} />
     <NavbarItem label="تنظیمات" icon={Icon.SettingsOutline} path={'settings'} />
     <div class="my-4 font-bold">اسناد</div>
@@ -67,8 +75,15 @@
   </nav>
 </div>
 
-<div class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8 md:w-[calc(100%-250px)]">
+<Notifications />
+
+<div class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8">
   <CommandPaletteModal />
   <ShareModal />
-  <slot />
+  <LockDownModal />
+  {#key data.url}
+    <main in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
+      <slot />
+    </main>
+  {/key}
 </div>

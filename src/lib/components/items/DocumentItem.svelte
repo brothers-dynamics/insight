@@ -9,6 +9,9 @@
   /* Stores */
   import ShareModalStateManagerStore from '$lib/stores/modalStateManagers/ShareModalStateManagerStore';
 
+  /* Components */
+  import InlineDocument from '$lib/components/utils/InlineDocument.svelte';
+
   /***********************
    * Implementation
    ***********************/
@@ -21,12 +24,7 @@
   <div class="flex gap-2">
     <Icon.Reader size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
-    <a
-      class="flex cursor-pointer items-center rounded bg-gray-200 px-2 text-[10px] text-gray-600"
-      href="/app/view/MAN-0001/1"
-    >
-      ➲ MAN-0001/1
-    </a>
+    <InlineDocument />
   </div>
   <div>
     <div class="line-clamp-2 text-[#555]">
@@ -57,7 +55,7 @@
     </div>
   </div>
   <div class="relative mt-1 flex gap-3">
-    <a class="flex gap-1 hover:font-bold" href="/app/view/MAN-0001/1">
+    <a class="flex gap-1 hover:font-bold" href="/view/MAN-0001/1">
       <Icon.ChevronForwardCircleOutline size="15" />
       <span class="text-[12px]">نمایش </span>
     </a>

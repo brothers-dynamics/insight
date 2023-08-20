@@ -12,6 +12,7 @@
 
   /* Components */
   import CredentialInput from './_components/CredentialInput.svelte';
+  import Waiting from '$lib/components/utils/Waiting.svelte';
 
   /* State Machines */
   import { Machine as LoginMachine, States as LoginStates } from './_machines/login';
@@ -102,23 +103,7 @@
         {#if $state.matches(LoginStates.LoggedIn)}
           <div class="h-full text-center leading-10">ورود موفقیت آمیز</div>
         {:else if $state.matches(LoginStates.LoggingIn)}
-          <div class="flex h-full items-center justify-center gap-1">
-            <Icon.Ellipse
-              class="animate-jump animate-delay-100 animate-duration-[600ms] animate-fill-both animate-infinite"
-              tabindex="-1"
-              size="10"
-            />
-            <Icon.Ellipse
-              class="animate-jump animate-delay-200 animate-duration-[600ms] animate-fill-both animate-infinite"
-              tabindex="-1"
-              size="10"
-            />
-            <Icon.Ellipse
-              class="animate-jump animate-delay-300 animate-duration-[600ms] animate-fill-both animate-infinite"
-              tabindex="-1"
-              size="10"
-            />
-          </div>
+          <Waiting />
         {:else}
           <div class="h-full text-center leading-10">ورود</div>
         {/if}

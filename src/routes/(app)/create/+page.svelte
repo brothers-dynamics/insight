@@ -6,12 +6,17 @@
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
+  /* Stores */
+  import NotificationsStateManagerStore from '$lib/stores/utils/NotificationsStateManagerStore';
+
   /* Components */
   import Editor from '$lib/components/utils/Editor.svelte';
   import TextInput from '$lib/components/form/TextInput.svelte';
   import TextareaInput from '$lib/components/form/TextareaInput.svelte';
   import TagSelectorInput from '$lib/components/form/TagSelectorInput.svelte';
   import MultiSelectInput from '$lib/components/form/MultiSelectInput.svelte';
+  import ButtonWithIcon from '$lib/components/form/ButtonWithIcon.svelte';
+  // import ButtonMicroWithIcon from '$lib/components/form/ButtonMicroWithIcon.svelte';
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
@@ -82,7 +87,10 @@
   >
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <div class="text-black/60">عنوان سند</div>
+        <div class="flex gap-2 divide-x divide-x-reverse">
+          <span class="text-black">عنوان سند</span>
+          <!-- <ButtonMicroWithIcon label="AI" icon={Icon.ColorWandOutline} /> -->
+        </div>
         <div class="text-xs text-black/40">
           عنوان سند را به گونه ای انتخاب کنید که کاملا واضح و منتاسب باشد.
         </div>
@@ -91,7 +99,7 @@
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <div class="text-black/60">محتوا</div>
+        <div class="text-black">محتوا</div>
         <div class="text-xs text-black/40">
           برای نوشتن محتوا مطمعن شوید از <a
             class="text-accent-60 underline"
@@ -105,7 +113,10 @@
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <div class="text-black/60">خلاصه</div>
+        <div class="flex gap-2 divide-x divide-x-reverse">
+          <span class="text-black">خلاصه</span>
+          <!-- <ButtonMicroWithIcon label="AI" icon={Icon.ColorWandOutline} /> -->
+        </div>
         <div class="text-xs text-black/40">
           برای نوشتن محتوا مطمعن شوید از <a
             class="text-accent-60 underline"
@@ -119,7 +130,10 @@
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <div class="text-black/60">دامنه</div>
+        <div class="flex gap-2 divide-x divide-x-reverse">
+          <span class="text-black">دامنه</span>
+          <!-- <ButtonMicroWithIcon label="AI" icon={Icon.ColorWandOutline} /> -->
+        </div>
         <div class="text-xs text-black/40">
           برای نوشتن محتوا مطمعن شوید از <a
             class="text-accent-60 underline"
@@ -142,7 +156,10 @@
     </div>
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">
-        <div class="text-black/60">تگ ها</div>
+        <div class="flex gap-2 divide-x divide-x-reverse">
+          <span class="text-black">تگ</span>
+          <!-- <ButtonMicroWithIcon label="AI" icon={Icon.ColorWandOutline} /> -->
+        </div>
         <div class="text-xs text-black/40">
           برای نوشتن محتوا مطمعن شوید از <a
             class="text-accent-60 underline"
@@ -150,7 +167,41 @@
           > استفاده میکنید.
         </div>
       </div>
-      <TagSelectorInput class="xl:w-128" />
+      <TagSelectorInput
+        class="xl:w-128"
+        list={[
+          { label: 'سند', value: '9' },
+          { label: 'جاوا', value: '8' },
+          { label: 'آموزش', value: '7' },
+          { label: 'راهنما', value: '6' },
+          { label: 'ویژه', value: '5' },
+          { label: 'مهم', value: '4' },
+          { label: 'دستگاه CNC', value: '3' },
+          { label: 'ایمنی', value: '2' },
+          { label: 'ارتباطات', value: '1' }
+        ]}
+      />
+    </div>
+    <div class="flex flex-wrap gap-4">
+      <ButtonWithIcon
+        class="w-full px-7 sm:w-fit"
+        label="ارسال"
+        icon={Icon.PushOutline}
+        on:click={({ detail: { done } }) => {
+          setTimeout(() => {
+            done();
+            NotificationsStateManagerStore.notify({
+              type: 'Success',
+              message: 'سند با موفقیت ارسال شد.'
+            });
+          }, 3000);
+        }}
+      />
+      <ButtonWithIcon
+        class="w-full bg-blue-600/80 px-7 hover:bg-blue-600 sm:w-fit"
+        label="ذخیره در پیشنویس"
+        icon={Icon.CreateOutline}
+      />
     </div>
   </div>
 </div>

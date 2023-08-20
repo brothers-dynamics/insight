@@ -16,6 +16,7 @@
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/color": "^3.0.3",
     "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
@@ -28,6 +29,7 @@
     "prettier-plugin-organize-imports": "^3.2.3",
     "prettier-plugin-svelte": "^2.10.1",
     "prettier-plugin-tailwindcss": "^0.4.1",
+    "prisma": "^5.1.1",
     "svelte": "^4.0.5",
     "svelte-check": "^3.4.3",
     "svelte-ionicons": "^0.5.8",
@@ -43,9 +45,13 @@
   "dependencies": {
     "@bytemd/plugin-gfm": "^1.21.0",
     "@bytemd/plugin-mermaid": "^1.21.0",
+    "@kitql/all-in": "^0.9.5",
+    "@prisma/client": "^5.1.1",
     "@xstate/svelte": "^2.1.0",
     "bytemd": "^1.21.0",
     "color": "^4.2.3",
+    "graphql": "^15.8.0",
+    "houdini": "^1.2.8",
     "markdown-it": "^13.0.1",
     "xstate": "^4.38.1"
   }

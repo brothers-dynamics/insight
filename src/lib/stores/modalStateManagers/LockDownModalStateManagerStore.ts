@@ -10,11 +10,11 @@ import SuperStore from '../SuperStore';
  ***********************/
 
 /**
- * Store to manage state of a command palette UI component.
+ * Store to manage state of a lockdown modal UI component.
  *
  * @extends {SuperStore}
  */
-class CommandPaletteModalStateManagerStore extends SuperStore<StateType> {
+class LockDownModalStateManagerStore extends SuperStore<StateType> {
   /**
    * Create the store with initial state.
    */
@@ -22,15 +22,7 @@ class CommandPaletteModalStateManagerStore extends SuperStore<StateType> {
     super({ visible: false });
   }
   /**
-   * Toggle visibility state of palette.
-   */
-  toggle(): void {
-    this.value = {
-      visible: !this.value.visible
-    };
-  }
-  /**
-   * Open the command palette.
+   * Open the lockdown modal.
    */
   open(): void {
     this.value = {
@@ -38,7 +30,7 @@ class CommandPaletteModalStateManagerStore extends SuperStore<StateType> {
     };
   }
   /**
-   * Close the command palette.
+   * Close the lockdown modal.
    */
   close(): void {
     this.value = {
@@ -59,4 +51,4 @@ type StateType = {
 /**
  * Exported singleton instance of store.
  */
-export default new CommandPaletteModalStateManagerStore();
+export default new LockDownModalStateManagerStore();

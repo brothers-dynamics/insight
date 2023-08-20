@@ -14,7 +14,7 @@
 
 <div class="flex flex-wrap gap-4">
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)]"
+    class="w-full lg:w-[calc(33.32%-.665rem)]"
     label="فعالیت های اخیر"
     icon={Icon.TimeOutline}
   >
@@ -61,7 +61,7 @@
   </Section>
 
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)]"
+    class="w-full lg:w-[calc(33.32%-.665rem)]"
     label="اعلان ها"
     icon={Icon.NotificationsOutline}
   >
@@ -146,7 +146,7 @@
   </Section>
 
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)]"
+    class="w-full lg:w-[calc(33.32%-.665rem)]"
     label="لیست خواندن"
     icon={Icon.FileTrayFullOutline}
   >
@@ -157,7 +157,7 @@
   </Section>
 
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)] "
+    class="w-full lg:w-[calc(33.32%-.665rem)] "
     label="اسناد دیده شده"
     icon={Icon.EyeOutline}
   >
@@ -170,7 +170,7 @@
   </Section>
 
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)] "
+    class="w-full lg:w-[calc(33.32%-.665rem)] "
     label="نشان شده ها"
     icon={Icon.BookmarksOutline}
   >
@@ -180,7 +180,7 @@
     <DocumentItem bookmarked={true} />
   </Section>
   <Section
-    class="| w-full lg:w-[calc(33.32%-.665rem)] "
+    class="w-full lg:w-[calc(33.32%-.665rem)] "
     label="اسناد پیشنهادی"
     icon={Icon.BarcodeOutline}
   >

@@ -11,7 +11,7 @@
    ***********************/
 
   export let placeholder = '';
-  export let type = 'text';
+  export let type: 'text' | 'password' = 'text';
   export let value = '';
 
   let clazz = '';
