@@ -82,7 +82,7 @@
   <ShareModal />
   <LockDownModal />
   {#key data.url}
-    <main in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
+    <main class="h-full" in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
       <slot />
     </main>
   {/key}

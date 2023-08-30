@@ -1,0 +1,24 @@
+# Definition
+type Log {
+  id: Int!
+  user: User!
+  action: Action!
+  data: Json!
+
+  createdAt: String!
+}
+# Queries
+extend type Query {
+  GetLog(id: Int!): Log
+  ListLogs: [Log!]!
+}
+# Mutations
+union LogMutationResponse = Log | Error
+input LogMutationInput {
+  action: Action!
+  data: Json!
+}
+extend type Mutation {
+  CreateLog(input: LogMutationInput!): LogMutationResponse!
+  DeleteLog(id: Int!): LogMutationResponse!
+}

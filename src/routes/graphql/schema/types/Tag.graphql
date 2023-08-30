@@ -1,0 +1,24 @@
+# Definition
+type Tag {
+  id: Int!
+  name: String!
+  documents: [Document!]
+
+  createdAt: String!
+  updatedAt: String!
+}
+# Queries
+extend type Query {
+  GetTag(id: Int!): Tag
+  ListTags: [Tag!]!
+}
+# Mutations
+union TagMutationResponse = Tag | Error
+input TagMutationInput {
+  name: String!
+}
+extend type Mutation {
+  CreateTag(input: TagMutationInput!): TagMutationResponse!
+  UpdateTag(id: Int!, input: TagMutationInput!): TagMutationResponse!
+  DeleteTag(id: Int!): TagMutationResponse!
+}

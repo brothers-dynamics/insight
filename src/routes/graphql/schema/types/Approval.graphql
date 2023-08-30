@@ -1,0 +1,22 @@
+# Definition
+type Approval {
+  id: Int!
+  document: Document!
+  approver: User!
+
+  createdAt: String!
+}
+# Queries
+extend type Query {
+  GetApproval(id: Int!): Approval
+  ListApprovals: [Approval!]!
+}
+# Mutations
+union ApprovalMutationResponse = Approval | Error
+input ApprovalMutationInput {
+  document: Int!
+}
+extend type Mutation {
+  CreateApproval(input: ApprovalMutationInput!): ApprovalMutationResponse!
+  DeleteApproval(id: Int!): ApprovalMutationResponse!
+}

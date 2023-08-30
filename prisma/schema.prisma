@@ -19,13 +19,16 @@ model User {
   active    Boolean @default(true)
   roles     Role[]
 
-  createdDocuments    Document[] @relation(name: "create")
-  bookmarkedDocuments Document[] @relation(name: "bookmark")
-  readDocuments       Document[] @relation(name: "read")
-  likedDocuments      Document[] @relation(name: "like")
+  createdDocuments    Document[]        @relation(name: "create")
+  bookmarkedDocuments Document[]        @relation(name: "bookmark")
+  readDocuments       Document[]        @relation(name: "read")
+  likedDocuments      Document[]        @relation(name: "like")
   approvals           Approval[]
+  revisionRequests    RevisionRequest[]
+  logs                Log[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Role {
@@ -39,41 +42,25 @@ model Role {
   createdAt DateTime @default(now())
 }
 
-model Tag {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  documents Document[]
-}
-
-model Approval {
-  id         Int      @id @default(autoincrement())
-  document   Document @relation(fields: [documentId], references: [id])
-  documentId Int      @unique
-  approver   User     @relation(fields: [approverId], references: [id])
-  approverId Int
-
-  createdAt DateTime @default(now())
-}
-
 model Document {
   id       Int          @id @default(autoincrement())
   code     String
   version  Int          @default(autoincrement())
-  author   User         @relation(name: "create", fields: [authorId], references: [id])
+  author   User         @relation(name: "create", fields: [authorId], references: [id], onDelete: Restrict)
   authorId Int
   type     documentType
   title    String       @unique
   domains  Role[]
   tags     Tag[]
 
-  approval     Approval?
-  bookmarkedBy User[]    @relation(name: "bookmark")
-  readBy       User[]    @relation(name: "read")
-  likedBy      User[]    @relation(name: "like")
+  approval        Approval?
+  revisionRequest RevisionRequest?
+  bookmarkedBy    User[]           @relation(name: "bookmark")
+  readBy          User[]           @relation(name: "read")
+  likedBy         User[]           @relation(name: "like")
 
   // other types must be added here
-  knowledge Knowledge[]
+  knowledge Knowledge?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -82,12 +69,53 @@ model Document {
 }
 
 model Knowledge {
-  content String @unique
-  summery String @default("")
+  content    String   @unique
+  summery    String   @default("")
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId Int      @unique
 
-  document Document @relation(fields: [documentId], references: [id])
+  createdAt DateTime @default(now())
+}
 
-  documentId Int @unique
+model Tag {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+
+  documents Document[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Approval {
+  id         Int      @id @default(autoincrement())
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  documentId Int      @unique
+  approver   User     @relation(fields: [approverId], references: [id], onDelete: Restrict)
+  approverId Int
+
+  createdAt DateTime @default(now())
+}
+
+model RevisionRequest {
+  id         Int      @id @default(autoincrement())
+  document   Document @relation(fields: [documentId], references: [id])
+  documentId Int      @unique
+  proposer   User     @relation(fields: [userId], references: [id])
+  userId     Int
+  message    String
+
+  createdAt DateTime @default(now())
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  action    Action
+  data      Json
+  createdAt DateTime @default(now())
 }
 
 enum documentType {
@@ -110,4 +138,24 @@ enum Privileges {
   UPDATE_TAG
   CREATE_ROLE
   UPDATE_ROLE
+}
+
+enum Action {
+  Login
+  Logout
+  DocumentCreate
+  DocumentDelete
+  DocumentApprove
+  DocumentRead
+  UserCreate
+  UserDelete
+  UserUpdate
+  RoleCreate
+  RoleDelete
+  RoleUpdate
+  TagCreate
+  TagDelete
+  TagUpdate
+  MessageSend
+  MessageRead
 }

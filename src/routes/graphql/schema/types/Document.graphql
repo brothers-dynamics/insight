@@ -1,0 +1,42 @@
+# Definition
+type Document {
+  id: Int!
+  code: String!
+  version: Int!
+  author: User!
+  type: documentType!
+  title: String!
+  domains: [Role!]!
+  tags: [Tag!]!
+
+  approval: Approval
+  revisionRequest RevisionRequest
+  bookmarkedBy: [User!]!
+  readBy: [User!]!
+  likedBy: [User!]!
+
+  knowledge: Knowledge
+
+  createdAt: String!
+  updatedAt: String!
+}
+# Queries
+extend type Query {
+  GetDocument(id: Int!): Document
+  ListDocuments: [Document!]!
+}
+# Mutations
+union DocumentMutationResponse = Document | Error
+input DocumentMutationInput {
+  code: String!
+  version: Int!
+  type: documentType!
+  title: String!
+  domains: [Int!]!
+  tags: [Int!]!
+}
+extend type Mutation {
+  CreateDocument(input: DocumentMutationInput!): DocumentMutationResponse!
+  UpdateDocument(id: Int!, input: DocumentMutationInput!): DocumentMutationResponse!
+  DeleteDocument(id: Int!): DocumentMutationResponse!
+}

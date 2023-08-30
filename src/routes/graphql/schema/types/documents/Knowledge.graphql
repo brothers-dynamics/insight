@@ -1,0 +1,25 @@
+# Definition
+type Knowledge {
+  content: String!
+  summery: String
+
+  document: Document!
+
+  createdAt: String!
+}
+# Queries
+extend type Query {
+  GetKnowledge(id: Int!): Knowledge
+  ListKnowledge: [Knowledge!]!
+}
+# Mutations
+union KnowledgeMutationResponse = Knowledge | Error
+input KnowledgeMutationInput {
+  content: String!
+  summery: String
+  document: Int!
+}
+extend type Mutation {
+  CreateKnowledge(input: KnowledgeMutationInput!): KnowledgeMutationResponse!
+  DeleteKnowledge(id: Int!): KnowledgeMutationResponse!
+}

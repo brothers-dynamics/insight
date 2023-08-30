@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/vazir-font/27.1.0/font-face.css');
-
-@import url('/node_modules/bytemd/dist/index.css');
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@33.003/misc/Farsi-Digits/Vazirmatn-FD-font-face.css');
 
 @tailwind utilities;
 @tailwind base;
@@ -18,7 +16,7 @@ html {
 }
 body {
   position: absolute;
-  font-family: 'Vazir', 'Ubuntu';
+  font-family: 'Vazirmatn FD', 'Ubuntu';
   direction: rtl;
   height: 100%;
   width: 100%;

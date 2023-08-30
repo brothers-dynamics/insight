@@ -27,11 +27,11 @@
   class:text-accent-90={active}
   class:font-bold={active}
   class:hover:text-black={!active}
-  href={'/' + path}
+  href={'/app/' + path}
 >
   {#if count}
     <div
-      class="absolute left-0 translate-x-1/2 rounded-md rounded-tr-none bg-accent-70 px-2 py-px text-center text-[11px] text-white"
+      class="absolute left-0 rounded-md rounded-tr-none bg-accent-70 px-2 py-px text-center text-[11px] text-white"
     >
       {count}
     </div>

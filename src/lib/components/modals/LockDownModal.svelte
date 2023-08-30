@@ -48,9 +48,3 @@
     </div>
   </div>
 {/if}
-
-<style>
-  input {
-    font-family: Vazir, Ubuntu;
-  }
-</style>

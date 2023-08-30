@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="relative mt-1 flex gap-3">
-    <a class="flex gap-1 hover:font-bold" href="/view/MAN-0001/1">
+    <a class="flex gap-1 hover:font-bold" href="/app/view/MAN-0001/1">
       <Icon.ChevronForwardCircleOutline size="15" />
       <span class="text-[12px]">نمایش </span>
     </a>
