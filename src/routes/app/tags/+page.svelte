@@ -103,7 +103,7 @@
         </div>
         <div class="text-xs text-black/40">به صورت مختصر توضیحی برای این تگ بنویسید.</div>
       </div>
-      <TextareaInput class="xl:w-128" />
+      <TextareaInput class="text-xs xl:w-128" />
     </div>
     <ButtonWithIcon
       class="w-full gap-2 px-3 sm:w-fit"

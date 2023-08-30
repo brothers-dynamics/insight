@@ -21,7 +21,7 @@
 
 <a
   class="flex cursor-pointer items-center rounded bg-gray-200 px-2 text-[10px] text-gray-600"
-  href="/view/{document.id}/{document.version}"
+  href="/app/view/{document.id}/{document.version}"
   use:overClass={clazz}
 >
   ➲ {document.id}/{document.version}

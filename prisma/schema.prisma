@@ -17,14 +17,14 @@ model User {
   firstname String
   lastname  String
   active    Boolean @default(true)
-  roles     Role[]
+  role      Role    @relation(fields: [roleId], references: [id])
+  roleId    Int
 
-  createdDocuments    Document[]        @relation(name: "create")
-  bookmarkedDocuments Document[]        @relation(name: "bookmark")
-  readDocuments       Document[]        @relation(name: "read")
-  likedDocuments      Document[]        @relation(name: "like")
+  createdDocuments    Document[] @relation(name: "create")
+  bookmarkedDocuments Document[] @relation(name: "bookmark")
+  readDocuments       Document[] @relation(name: "read")
+  likedDocuments      Document[] @relation(name: "like")
   approvals           Approval[]
-  revisionRequests    RevisionRequest[]
   logs                Log[]
 
   createdAt DateTime @default(now())
@@ -44,37 +44,44 @@ model Role {
 
 model Document {
   id       Int          @id @default(autoincrement())
-  code     String
-  version  Int          @default(autoincrement())
+  code     String       @unique
   author   User         @relation(name: "create", fields: [authorId], references: [id], onDelete: Restrict)
   authorId Int
   type     documentType
   title    String       @unique
+  summery  String
+  latest   Int          @default(1)
   domains  Role[]
   tags     Tag[]
 
-  approval        Approval?
-  revisionRequest RevisionRequest?
-  bookmarkedBy    User[]           @relation(name: "bookmark")
-  readBy          User[]           @relation(name: "read")
-  likedBy         User[]           @relation(name: "like")
+  approval     Approval?
+  bookmarkedBy User[]     @relation(name: "bookmark")
+  readBy       User[]     @relation(name: "read")
+  likedBy      User[]     @relation(name: "like")
+  referencedTo Document[] @relation(name: "reference")
+  referencedBy Document[] @relation(name: "reference")
 
   // other types must be added here
-  knowledge Knowledge?
+  knowledges Knowledge[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  @@unique([code, version])
 }
 
 model Knowledge {
-  content    String   @unique
-  summery    String   @default("")
+  id       Int        @id @default(autoincrement())
+  parent   Knowledge? @relation(name: "inheritence")
+  child    Knowledge? @relation(name: "inheritence", fields: [parentId], references: [id], onDelete: Restrict)
+  parentId Int?       @unique
+
+  content    String
+  version    Int      @default(1)
   document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  documentId Int      @unique
+  documentId Int
 
   createdAt DateTime @default(now())
+
+  @@unique([documentId, version])
 }
 
 model Tag {
@@ -89,24 +96,16 @@ model Tag {
 }
 
 model Approval {
-  id         Int      @id @default(autoincrement())
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Restrict)
-  documentId Int      @unique
-  approver   User     @relation(fields: [approverId], references: [id], onDelete: Restrict)
-  approverId Int
+  id         Int            @id @default(autoincrement())
+  document   Document       @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  documentId Int            @unique
+  status     ApprovalStatus @default(PENDING)
+  handler    User?          @relation(fields: [handlerId], references: [id], onDelete: Restrict)
+  handlerId  Int?
+  message    String?
 
   createdAt DateTime @default(now())
-}
-
-model RevisionRequest {
-  id         Int      @id @default(autoincrement())
-  document   Document @relation(fields: [documentId], references: [id])
-  documentId Int      @unique
-  proposer   User     @relation(fields: [userId], references: [id])
-  userId     Int
-  message    String
-
-  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Log {
@@ -120,6 +119,13 @@ model Log {
 
 enum documentType {
   KNOWLEDGE
+}
+
+enum ApprovalStatus {
+  APPROVED
+  REJECTED
+  PENDING
+  REVISION
 }
 
 enum Privileges {

@@ -3,8 +3,14 @@
    * Dependencies
    ***********************/
 
+  /* Svelte built-in libraries */
+  import { page } from '$app/stores';
+
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
+
+  /* Stores */
+  import NavigationParams from '$lib/stores/core/NavigationParams';
 
   /* Components */
   import TextInput from '$lib/components/form/TextInput.svelte';
@@ -14,6 +20,20 @@
   import DocumentItem from '$lib/components/items/DocumentItem.svelte';
   import SelectionButtonGroup from '$lib/components/utils/SelectionButtonGroup.svelte';
   import ButtonWithIcon from '$lib/components/form/ButtonWithIcon.svelte';
+
+  /***********************
+   * Implementation
+   ***********************/
+
+  let title = ''
+
+  let config: any;
+  $: if ($NavigationParams.config) {
+    config = $NavigationParams.config;
+    if (config.title) {
+      title = config.title;
+    }
+  }
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
@@ -22,7 +42,7 @@
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">عنوان سند</div>
       </div>
-      <TextInput />
+      <TextInput bind:value={title} />
     </div>
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">

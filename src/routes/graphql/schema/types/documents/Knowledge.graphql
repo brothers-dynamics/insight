@@ -1,8 +1,6 @@
 # Definition
 type Knowledge {
   content: String!
-  summery: String
-
   document: Document!
 
   createdAt: String!
@@ -16,7 +14,6 @@ extend type Query {
 union KnowledgeMutationResponse = Knowledge | Error
 input KnowledgeMutationInput {
   content: String!
-  summery: String
   document: Int!
 }
 extend type Mutation {

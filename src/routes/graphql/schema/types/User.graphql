@@ -6,14 +6,13 @@ type User {
   lastname: String!
   active: Boolean!
 
-  roles: [Role!]!
+  role: Role!
   logs: [Log!]!
   createdDocuments: [Document!]
   bookmarkedDocuments: [Document!]
   readDocuments: [Document!]
   likedDocuments: [Document!]
   approvals: [Approval!]
-  revisionRequests: [RevisionRequest!]
   logs: [Log!]
 
   # only used to send token after successful login
@@ -35,7 +34,7 @@ input UserMutationInput {
   firstname: String!
   lastname: String!
   active: Boolean!
-  roles: [Int!]!
+  role: Int!
 }
 extend type Mutation {
   CreateUser(input: UserMutationInput!): UserMutationResponse!

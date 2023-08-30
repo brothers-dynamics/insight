@@ -20,7 +20,12 @@ schema {
 enum documentType {
   KNOWLEDGE
 }
-
+enum ApprovalStatus {
+  APPROVED
+  REJECTED
+  PENDING
+  REVISION
+}
 enum Privileges {
   ADMIN
   CREATE_USER
@@ -38,7 +43,6 @@ enum Privileges {
   CREATE_ROLE
   UPDATE_ROLE
 }
-
 enum Action {
   Login
   Logout
@@ -58,3 +62,6 @@ enum Action {
   MessageSend
   MessageRead
 }
+
+# unions
+union DocumentContent = Knowledge

@@ -2,10 +2,11 @@
 type Document {
   id: Int!
   code: String!
-  version: Int!
   author: User!
   type: documentType!
   title: String!
+  summery: String
+  latest: DocumentContent!
   domains: [Role!]!
   tags: [Tag!]!
 
@@ -14,8 +15,10 @@ type Document {
   bookmarkedBy: [User!]!
   readBy: [User!]!
   likedBy: [User!]!
+  referencedTo: [Document!]!
+  referencedBy: [Document!]!
 
-  knowledge: Knowledge
+  knowledges: [Knowledge!]!
 
   createdAt: String!
   updatedAt: String!
@@ -29,9 +32,9 @@ extend type Query {
 union DocumentMutationResponse = Document | Error
 input DocumentMutationInput {
   code: String!
-  version: Int!
   type: documentType!
   title: String!
+  summery: String
   domains: [Int!]!
   tags: [Int!]!
 }

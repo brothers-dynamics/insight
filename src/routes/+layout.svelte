@@ -3,11 +3,33 @@
    * Dependencies
    ***********************/
 
+  import { page } from '$app/stores';
+
   /* 3rd party libraries */
   import '../app.css';
 
+  /* Stores */
+  import NavigationParams from '$lib/stores/core/NavigationParams';
+
   /* Components */
   import FakeProgressBar from '$lib/components/utils/FakeProgressBar.svelte';
+  import { browser } from '$app/environment';
+
+  /***********************
+   * Implementation
+   ***********************/
+
+  if (browser) {
+    page.subscribe(() => {
+      NavigationParams.update(() => {
+        const params: any = {};
+        for (const key in history.state) {
+          params[key] = history.state[key];
+        }
+        return params;
+      });
+    });
+  }
 </script>
 
 <svelte:head>

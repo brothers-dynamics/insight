@@ -39,7 +39,7 @@
   });
 </script>
 
-<div class="flex w-full flex-col justify-start bg-white/50 p-4 md:w-[300px]">
+<div class="flex w-full shrink-0 flex-col justify-start bg-white/50 p-4 md:w-[300px]">
   <nav class="relative flex gap-2 rounded bg-white/70 py-6 pr-8 text-[13px] text-black shadow-sm">
     <div class="flex h-12 w-12 items-center justify-center rounded bg-accent-50 text-white">کط</div>
     <div class="flex flex-col gap-1">
@@ -82,7 +82,7 @@
   <ShareModal />
   <LockDownModal />
   {#key data.url}
-    <main class="h-full" in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
+    <main class="min-h-full" in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
       <slot />
     </main>
   {/key}

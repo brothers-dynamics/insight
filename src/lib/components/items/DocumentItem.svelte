@@ -22,7 +22,7 @@
 
 <div class="flex flex-col gap-3 rounded-default bg-white px-3 py-2 text-xs">
   <div class="flex gap-2">
-    <Icon.Reader size="18" />
+    <Icon.ReaderOutline size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
     <InlineDocument />
   </div>

@@ -3,13 +3,13 @@
    * Dependencies
    ***********************/
 
-  import type { Prisma } from '@prisma/client';
-
   /* 3rd party libraries */
+  import type { Prisma } from '@prisma/client';
   import * as Icon from 'svelte-ionicons';
 
   /* Actions */
   import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+  import { goto } from '$app/navigation';
 
   /***********************
    * Implementation
@@ -34,22 +34,29 @@
   function changeModeToWrite() {
     mode = 'Write';
   }
-
   function cancelWriting() {
     mode = 'Read';
     newName = data.name;
     newDescription = data.description;
   }
-
   function updateTag() {
     // todo
     data.name = newName;
     data.description = newDescription;
     cancelWriting();
   }
-
   function deleteTag() {
     // todo
+  }
+
+  function searchForTagDocuments() {
+    goto('/app/search', {
+      state: {
+        config: {
+          title: data.name
+        }
+      }
+    });
   }
 </script>
 
@@ -61,10 +68,10 @@
   <div
     class="absolute bottom-2 right-2 flex shrink-0 items-center justify-center rounded-lg bg-accent-60 px-2 text-white"
   >
-    <div class="flex gap-1 text-xs">
+    <button class="z-10 flex gap-1 text-xs" on:click={searchForTagDocuments}>
       <Icon.DocumentTextOutline class="relative top-px" size="12" />
       <span>{data.documents.length + 12} سند </span>
-    </div>
+    </button>
   </div>
   <div class="z-[1] flex w-full flex-col justify-between gap-1">
     <div class="flex w-full flex-col" class:gap-2={mode === 'Write'}>
@@ -94,7 +101,7 @@
       {/if}
     </div>
   </div>
-  <div class="absolute bottom-0 left-2 flex translate-y-1/2 gap-2">
+  <div class="absolute bottom-0 left-2 z-10 flex translate-y-1/2 gap-2">
     <button
       class="relative cursor-pointer rounded-2xl bg-accent-50 px-3 py-5 duration-75 hover:bg-accent-70"
       on:click={mode === 'Read' ? changeModeToWrite : updateTag}

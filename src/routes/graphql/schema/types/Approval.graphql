@@ -2,9 +2,12 @@
 type Approval {
   id: Int!
   document: Document!
-  approver: User!
+  status: ApprovalStatus!
+  handler: User
+  message: String
 
   createdAt: String!
+  updatedAt: String!
 }
 # Queries
 extend type Query {
@@ -13,10 +16,16 @@ extend type Query {
 }
 # Mutations
 union ApprovalMutationResponse = Approval | Error
-input ApprovalMutationInput {
+input ApprovalMutationUpdateInput {
+  document: Int!
+  status: ApprovalStatus!
+  message: String
+}
+input ApprovalMutationCreateInput {
   document: Int!
 }
 extend type Mutation {
-  CreateApproval(input: ApprovalMutationInput!): ApprovalMutationResponse!
+  CreateApproval(input: ApprovalMutationCreateInput!): ApprovalMutationResponse!
+  UpdateApproval(input: ApprovalMutationUpdateInput!): ApprovalMutationResponse!
   DeleteApproval(id: Int!): ApprovalMutationResponse!
 }
