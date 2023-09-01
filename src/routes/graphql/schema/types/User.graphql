@@ -5,8 +5,8 @@ type User {
   firstname: String!
   lastname: String!
   active: Boolean!
-
   role: Role!
+
   logs: [Log!]!
   createdDocuments: [Document!]
   bookmarkedDocuments: [Document!]
@@ -15,16 +15,11 @@ type User {
   approvals: [Approval!]
   logs: [Log!]
 
-  # only used to send token after successful login
-  jwt: String
   createdAt: String!
   updatedAt: String!
-}
-# Queries
-extend type Query {
-  GetUser(id: Int!): User
-  ListUsers: [User!]!
-  CurrentUser: User
+
+  # only used to send token after successful login
+  jwt: String
 }
 # Mutations
 union UserMutationResponse = User | Error
@@ -35,10 +30,4 @@ input UserMutationInput {
   lastname: String!
   active: Boolean!
   role: Int!
-}
-extend type Mutation {
-  CreateUser(input: UserMutationInput!): UserMutationResponse!
-  UpdateUser(id: Int!, input: UserMutationInput!): UserMutationResponse!
-  DeleteUser(id: Int!): UserMutationResponse!
-  Login(username: String!, password: String!): UserMutationResponse!
 }

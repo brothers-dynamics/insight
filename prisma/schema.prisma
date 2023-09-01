@@ -54,34 +54,42 @@ model Document {
   domains  Role[]
   tags     Tag[]
 
-  approval     Approval?
   bookmarkedBy User[]     @relation(name: "bookmark")
   readBy       User[]     @relation(name: "read")
   likedBy      User[]     @relation(name: "like")
   referencedTo Document[] @relation(name: "reference")
   referencedBy Document[] @relation(name: "reference")
 
-  // other types must be added here
-  knowledges Knowledge[]
+  contents ContentUnion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Knowledge {
-  id       Int        @id @default(autoincrement())
-  parent   Knowledge? @relation(name: "inheritence")
-  child    Knowledge? @relation(name: "inheritence", fields: [parentId], references: [id], onDelete: Restrict)
-  parentId Int?       @unique
+model ContentUnion {
+  id         Int          @id @default(autoincrement())
+  type       documentType
+  version    Int          @default(1)
+  Document   Document?    @relation(fields: [documentId], references: [id])
+  documentId Int?
+  Approval   Approval?
 
-  content    String
-  version    Int      @default(1)
-  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
-  documentId Int
+  parent   ContentUnion? @relation(name: "inheritence")
+  child    ContentUnion? @relation(name: "inheritence", fields: [parentId], references: [id], onDelete: Restrict)
+  parentId Int?          @unique
+
+  // other types must be added here
+  knowledge   Knowledge?
+  knowledgeId Int?
+}
+
+model Knowledge {
+  contentUnion   ContentUnion @relation(fields: [contentUnionId], references: [id])
+  contentUnionId Int          @unique
+
+  content String
 
   createdAt DateTime @default(now())
-
-  @@unique([documentId, version])
 }
 
 model Tag {
@@ -96,13 +104,13 @@ model Tag {
 }
 
 model Approval {
-  id         Int            @id @default(autoincrement())
-  document   Document       @relation(fields: [documentId], references: [id], onDelete: Restrict)
-  documentId Int            @unique
-  status     ApprovalStatus @default(PENDING)
-  handler    User?          @relation(fields: [handlerId], references: [id], onDelete: Restrict)
-  handlerId  Int?
-  message    String?
+  id             Int            @id @default(autoincrement())
+  contentUnion   ContentUnion   @relation(fields: [contentUnionId], references: [id], onDelete: Restrict)
+  contentUnionId Int            @unique
+  status         ApprovalStatus @default(PENDING)
+  handler        User?          @relation(fields: [handlerId], references: [id], onDelete: Restrict)
+  handlerId      Int?
+  message        String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -77,12 +77,16 @@
 
 <Notifications />
 
-<div class="relative max-h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8">
+<div class="relative h-[100vh] w-full grow overflow-y-auto p-4 sm:p-8">
   <CommandPaletteModal />
   <ShareModal />
   <LockDownModal />
   {#key data.url}
-    <main class="min-h-full" in:fade={{ duration: 150, delay: 150 }} out:fade={{ duration: 150 }}>
+    <main
+      class="min-h-[calc(100vh-4rem)]"
+      in:fade={{ duration: 150, delay: 200 }}
+      out:fade={{ duration: 150 }}
+    >
       <slot />
     </main>
   {/key}

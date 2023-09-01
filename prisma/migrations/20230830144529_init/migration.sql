@@ -2,6 +2,9 @@
 CREATE TYPE "documentType" AS ENUM ('KNOWLEDGE');
 
 -- CreateEnum
+CREATE TYPE "ApprovalStatus" AS ENUM ('APPROVED', 'REJECTED', 'PENDING', 'REVISION');
+
+-- CreateEnum
 CREATE TYPE "Privileges" AS ENUM ('ADMIN', 'CREATE_USER', 'UPDATE_USER', 'CREATE_KNOWLEDGE', 'APPROVE_KNOWLEDGE', 'CREATE_MANUAL', 'APPROVE_MANUAL', 'CREATE_PROCEDURE', 'APPROVE_PROCEDURE', 'CREATE_POLICY', 'APPROVE_POLICY', 'CREATE_TAG', 'UPDATE_TAG', 'CREATE_ROLE', 'UPDATE_ROLE');
 
 -- CreateEnum
@@ -15,6 +18,7 @@ CREATE TABLE "User" (
     "firstname" TEXT NOT NULL,
     "lastname" TEXT NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
+    "roleId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -35,10 +39,11 @@ CREATE TABLE "Role" (
 CREATE TABLE "Document" (
     "id" SERIAL NOT NULL,
     "code" TEXT NOT NULL,
-    "version" SERIAL NOT NULL,
     "authorId" INTEGER NOT NULL,
     "type" "documentType" NOT NULL,
     "title" TEXT NOT NULL,
+    "summery" TEXT NOT NULL,
+    "latest" INTEGER NOT NULL DEFAULT 1,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -46,10 +51,21 @@ CREATE TABLE "Document" (
 );
 
 -- CreateTable
+CREATE TABLE "ContentUnion" (
+    "id" SERIAL NOT NULL,
+    "type" "documentType" NOT NULL,
+    "version" INTEGER NOT NULL DEFAULT 1,
+    "parentId" INTEGER,
+    "documentId" INTEGER,
+    "knowledgeId" INTEGER,
+
+    CONSTRAINT "ContentUnion_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Knowledge" (
+    "contentUnionId" INTEGER NOT NULL,
     "content" TEXT NOT NULL,
-    "summery" TEXT NOT NULL DEFAULT '',
-    "documentId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -57,6 +73,7 @@ CREATE TABLE "Knowledge" (
 CREATE TABLE "Tag" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -67,21 +84,13 @@ CREATE TABLE "Tag" (
 CREATE TABLE "Approval" (
     "id" SERIAL NOT NULL,
     "documentId" INTEGER NOT NULL,
-    "approverId" INTEGER NOT NULL,
+    "status" "ApprovalStatus" NOT NULL DEFAULT 'PENDING',
+    "handlerId" INTEGER,
+    "message" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Approval_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "RevisionRequest" (
-    "id" SERIAL NOT NULL,
-    "documentId" INTEGER NOT NULL,
-    "userId" INTEGER NOT NULL,
-    "message" TEXT NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "RevisionRequest_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -93,12 +102,6 @@ CREATE TABLE "Log" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Log_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "_RoleToUser" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL
 );
 
 -- CreateTable
@@ -131,32 +134,29 @@ CREATE TABLE "_like" (
     "B" INTEGER NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "_reference" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Document_code_key" ON "Document"("code");
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Document_title_key" ON "Document"("title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Document_code_version_key" ON "Document"("code", "version");
+CREATE UNIQUE INDEX "ContentUnion_parentId_key" ON "ContentUnion"("parentId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Knowledge_content_key" ON "Knowledge"("content");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Knowledge_documentId_key" ON "Knowledge"("documentId");
+CREATE UNIQUE INDEX "Knowledge_contentUnionId_key" ON "Knowledge"("contentUnionId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Tag_name_key" ON "Tag"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Approval_documentId_key" ON "Approval"("documentId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "RevisionRequest_documentId_key" ON "RevisionRequest"("documentId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "_RoleToUser_AB_unique" ON "_RoleToUser"("A", "B");
-
--- CreateIndex
-CREATE INDEX "_RoleToUser_B_index" ON "_RoleToUser"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_DocumentToRole_AB_unique" ON "_DocumentToRole"("A", "B");
@@ -188,32 +188,35 @@ CREATE UNIQUE INDEX "_like_AB_unique" ON "_like"("A", "B");
 -- CreateIndex
 CREATE INDEX "_like_B_index" ON "_like"("B");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "_reference_AB_unique" ON "_reference"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_reference_B_index" ON "_reference"("B");
+
+-- AddForeignKey
+ALTER TABLE "User" ADD CONSTRAINT "User_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
 -- AddForeignKey
 ALTER TABLE "Document" ADD CONSTRAINT "Document_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Knowledge" ADD CONSTRAINT "Knowledge_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "ContentUnion" ADD CONSTRAINT "ContentUnion_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "ContentUnion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ContentUnion" ADD CONSTRAINT "ContentUnion_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Knowledge" ADD CONSTRAINT "Knowledge_contentUnionId_fkey" FOREIGN KEY ("contentUnionId") REFERENCES "ContentUnion"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Approval" ADD CONSTRAINT "Approval_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Approval" ADD CONSTRAINT "Approval_approverId_fkey" FOREIGN KEY ("approverId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "RevisionRequest" ADD CONSTRAINT "RevisionRequest_documentId_fkey" FOREIGN KEY ("documentId") REFERENCES "Document"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "RevisionRequest" ADD CONSTRAINT "RevisionRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Approval" ADD CONSTRAINT "Approval_handlerId_fkey" FOREIGN KEY ("handlerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Log" ADD CONSTRAINT "Log_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_RoleToUser" ADD CONSTRAINT "_RoleToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Role"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "_RoleToUser" ADD CONSTRAINT "_RoleToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_DocumentToRole" ADD CONSTRAINT "_DocumentToRole_A_fkey" FOREIGN KEY ("A") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -244,3 +247,9 @@ ALTER TABLE "_like" ADD CONSTRAINT "_like_A_fkey" FOREIGN KEY ("A") REFERENCES "
 
 -- AddForeignKey
 ALTER TABLE "_like" ADD CONSTRAINT "_like_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_reference" ADD CONSTRAINT "_reference_A_fkey" FOREIGN KEY ("A") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_reference" ADD CONSTRAINT "_reference_B_fkey" FOREIGN KEY ("B") REFERENCES "Document"("id") ON DELETE CASCADE ON UPDATE CASCADE;

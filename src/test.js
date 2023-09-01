@@ -4,10 +4,14 @@ const prisma = new PrismaClient();
 async function main() {
   const documents = await prisma.document.findMany({
     include: {
-      knowledges: true
+      contents: {
+        include: {
+          knowledge: true
+        }
+      }
     }
   });
-  console.log(documents[0].knowledges);
+  console.dir(documents[0], { depth: null });
 }
 
 main();

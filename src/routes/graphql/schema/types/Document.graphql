@@ -6,27 +6,20 @@ type Document {
   type: documentType!
   title: String!
   summery: String
-  latest: DocumentContent!
+  latest: Content!
   domains: [Role!]!
   tags: [Tag!]!
 
-  approval: Approval
-  revisionRequest RevisionRequest
   bookmarkedBy: [User!]!
   readBy: [User!]!
   likedBy: [User!]!
   referencedTo: [Document!]!
   referencedBy: [Document!]!
 
-  knowledges: [Knowledge!]!
+  editions: [Content!]!
 
   createdAt: String!
   updatedAt: String!
-}
-# Queries
-extend type Query {
-  GetDocument(id: Int!): Document
-  ListDocuments: [Document!]!
 }
 # Mutations
 union DocumentMutationResponse = Document | Error
@@ -37,9 +30,4 @@ input DocumentMutationInput {
   summery: String
   domains: [Int!]!
   tags: [Int!]!
-}
-extend type Mutation {
-  CreateDocument(input: DocumentMutationInput!): DocumentMutationResponse!
-  UpdateDocument(id: Int!, input: DocumentMutationInput!): DocumentMutationResponse!
-  DeleteDocument(id: Int!): DocumentMutationResponse!
 }

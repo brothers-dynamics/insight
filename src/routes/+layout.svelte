@@ -39,7 +39,7 @@
 
 <FakeProgressBar />
 
-<div class="global-wrapper relative flex min-h-full w-full flex-col md:flex-row">
+<div class="global-wrapper relative flex h-full w-full flex-col overflow-hidden md:flex-row">
   <div class="fixed inset-0 -z-50 bg-shady" />
   <slot />
 </div>
