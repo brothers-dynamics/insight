@@ -1,13 +1,32 @@
 extend type Mutation {
-	userCreate(fields: UserCreateFields!): User
-	userUpdate(id: ID!, fields: UserUpdateFields!): User
-	userDelete(id: ID!): User
+  userCreate(fields: UserCreateFields!): UserMutationResponse
+  userUpdate(id: Int!, fields: UserUpdateFields!): UserMutationResponse
+  userDelete(id: Int!): UserMutationResponse
+
+  login(fields: UserCredentialFields): User
+}
+
+union UserMutationResponse = User | Error
+
+input UserCredentialFields {
+  username: String!
+  password: String!
 }
 
 input UserCreateFields {
-	username: String!
+  username: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  active: Boolean!
+  role: Int!
 }
 
 input UserUpdateFields {
-	username: String
+  username: String!
+  password: String!
+  firstname: String!
+  lastname: String!
+  active: Boolean!
+  role: Int!
 }

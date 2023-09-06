@@ -8,7 +8,8 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-namespace': 'off'
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],

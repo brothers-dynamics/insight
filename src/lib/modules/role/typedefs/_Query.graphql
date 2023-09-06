@@ -1,0 +1,3 @@
+extend type Query {
+  role(id: Int!): Role
+}

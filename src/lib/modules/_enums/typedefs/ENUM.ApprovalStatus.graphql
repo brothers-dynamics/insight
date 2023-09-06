@@ -1,0 +1,6 @@
+enum ApprovalStatus {
+	APPROVED
+	REJECTED
+	PENDING
+	REVISION
+}

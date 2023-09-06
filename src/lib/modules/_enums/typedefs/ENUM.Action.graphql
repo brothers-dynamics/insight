@@ -1,0 +1,19 @@
+enum Action {
+	Login
+	Logout
+	DocumentCreate
+	DocumentDelete
+	DocumentApprove
+	DocumentRead
+	UserCreate
+	UserDelete
+	UserUpdate
+	RoleCreate
+	RoleDelete
+	RoleUpdate
+	TagCreate
+	TagDelete
+	TagUpdate
+	MessageSend
+	MessageRead
+}

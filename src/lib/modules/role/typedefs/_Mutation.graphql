@@ -1,0 +1,15 @@
+extend type Mutation {
+  roleCreate(fields: RoleCreateFields!): Role
+  roleUpdate(id: Int!, fields: RoleUpdateFields!): Role
+  roleDelete(id: Int!): Role
+}
+
+input RoleCreateFields {
+  name: String
+  privileges: [Privileges]!
+}
+
+input RoleUpdateFields {
+  name: String
+  privileges: [Privileges]!
+}

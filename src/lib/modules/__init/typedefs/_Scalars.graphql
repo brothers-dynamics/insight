@@ -3,3 +3,9 @@ scalar Date
 
 " scalar for the DateTime xx/xx/xxxxTxx:xx:xx.xxxz "
 scalar DateTime
+
+" scalar for json type "
+scalar Json
+
+" scalar for js object type "
+scalar Object

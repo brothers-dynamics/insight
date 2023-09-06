@@ -9,7 +9,9 @@ const require = createRequire(import.meta.url);
 
 export default defineConfig({
   plugins: [
-    kitql(),
+    kitql({
+      prismaFileForEnums: 'prisma/schema.prisma'
+    }),
     houdini(),
     sveltekit(),
     ckeditor5({ theme: require.resolve('@ckeditor/ckeditor5-theme-lark') })

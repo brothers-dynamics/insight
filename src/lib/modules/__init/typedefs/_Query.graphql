@@ -1,4 +1,15 @@
-" Our loved graphql Query root "
+"graphql Query root"
 type Query {
-	version: Version!
+  version: Version!
+  persian: Error
+}
+
+"contains information about the error that occurred"
+type Error {
+  "error code as integer"
+  code: Int!
+  "error message as text (optional)"
+  message: String
+  "contains extra data about the error"
+  extension: Object
 }
