@@ -1,15 +1,17 @@
 extend type Mutation {
-  roleCreate(fields: RoleCreateFields!): Role
-  roleUpdate(id: Int!, fields: RoleUpdateFields!): Role
-  roleDelete(id: Int!): Role
+  roleCreate(fields: RoleCreateFields!): RoleMutationResponse
+  roleUpdate(id: Int!, fields: RoleUpdateFields!): RoleMutationResponse
+  roleDelete(id: Int!): RoleMutationResponse
 }
 
+union RoleMutationResponse = Role | ErrorList
+
 input RoleCreateFields {
-  name: String
-  privileges: [Privileges]!
+  name: String!
+  privileges: [Privileges!]!
 }
 
 input RoleUpdateFields {
   name: String
-  privileges: [Privileges]!
+  privileges: [Privileges!]
 }

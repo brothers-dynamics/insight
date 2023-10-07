@@ -6,4 +6,5 @@ type Role {
   users: [User!]
 
   createdAt: DateTime!
+  updatedAt: DateTime!
 }

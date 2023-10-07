@@ -1,0 +1,9 @@
+type Approval {
+  handler: User
+  status: ApprovalStatus!
+  message: String
+  content: DocumentContentType
+
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

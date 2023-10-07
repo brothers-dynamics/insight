@@ -14,6 +14,23 @@
   import TextInput from '$lib/components/form/TextInput.svelte';
   import TextareaInput from '$lib/components/form/TextareaInput.svelte';
   import ButtonWithIcon from '$lib/components/form/ButtonWithIcon.svelte';
+  import { graphql } from '$houdini';
+
+  const data = graphql(`
+    query Tags1 {
+      tags {
+        id
+        name
+        description
+        documents {
+          id
+        }
+        createdAt
+      }
+    }
+  `);
+
+  $: console.log($data)
 </script>
 
 <div class="min-h-full bg-white p-3">

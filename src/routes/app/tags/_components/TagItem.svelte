@@ -8,8 +8,8 @@
   import * as Icon from 'svelte-ionicons';
 
   /* Actions */
-  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
   import { goto } from '$app/navigation';
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
 
   /***********************
    * Implementation

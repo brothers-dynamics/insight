@@ -3,10 +3,10 @@ extend type Mutation {
   userUpdate(id: Int!, fields: UserUpdateFields!): UserMutationResponse
   userDelete(id: Int!): UserMutationResponse
 
-  login(fields: UserCredentialFields): User
+  login(fields: UserCredentialFields): UserMutationResponse
 }
 
-union UserMutationResponse = User | Error
+union UserMutationResponse = User | ErrorList
 
 input UserCredentialFields {
   username: String!
@@ -19,14 +19,14 @@ input UserCreateFields {
   firstname: String!
   lastname: String!
   active: Boolean!
-  role: Int!
+  roleId: Int!
 }
 
 input UserUpdateFields {
-  username: String!
-  password: String!
-  firstname: String!
-  lastname: String!
-  active: Boolean!
-  role: Int!
+  username: String
+  password: String
+  firstname: String
+  lastname: String
+  active: Boolean
+  roleId: Int
 }

@@ -1,0 +1,10 @@
+type Tag {
+  id: Int!
+  name: String!
+  description: String!
+
+  documents: [Document!]
+
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

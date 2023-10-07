@@ -1,0 +1,29 @@
+extend type Mutation {
+  documentKnowledgeCreateNew(fields: KnowledgeCreateNewInput): DocumentMutationResponse
+  documentKnowledgeCreateEdition(fields: KnowledgeCreateEditionInput): DocumentMutationResponse
+  documentArchive(documentId: Int!): DocumentMutationResponse
+  documentUnarchive(documentId: Int!): DocumentMutationResponse
+  documentAlterApprovalState(fields: AlterApprovalStateInput): DocumentMutationResponse
+}
+
+union DocumentMutationResponse = Document | ErrorList
+
+input KnowledgeCreateNewInput {
+  title: String!
+  summery: String!
+  authorId: Int!
+  domains: [Int!]!
+  tags: [Int!]!
+  content: String!
+}
+
+input KnowledgeCreateEditionInput {
+  documentId: Int!
+  content: String!
+}
+
+input AlterApprovalStateInput {
+  contentId: Int!
+  newStates: ApprovalStatus!
+  message: String
+}

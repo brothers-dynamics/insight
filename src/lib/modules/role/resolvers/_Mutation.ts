@@ -1,53 +1,89 @@
-import type { Privileges } from '@prisma/client';
-import { GraphQLError } from 'graphql';
+import { parseAndAssert } from '$modules/__init/helpers/assertion';
+import {
+  handlePrismaError,
+  handleValidationError,
+  unknownFailure
+} from '$modules/__init/helpers/errors';
+import { Prisma } from '@prisma/client';
 import type { RoleModule } from '../$kitql/moduleTypes';
+import { roleArgsSchema } from '../validators/_Role';
 
 export const resolvers: RoleModule.Resolvers = {
+  // @ts-ignore
+  RoleMutationResponse: {
+    // @ts-ignore
+    __resolveType(root) {
+      if (root.id) {
+        return 'Role';
+      }
+      return 'ErrorList';
+    }
+  },
   Mutation: {
-    roleCreate: async function (root, { fields }, { prisma }) {
-      if (fields.name && fields.privileges.length > 0) {
+    roleCreate: async function (root, { fields }, { prisma, zod }) {
+      const roleCreateArgsSchema = roleArgsSchema;
+      try {
+        const data = await parseAndAssert(roleCreateArgsSchema, fields);
         const role = await prisma.role.create({
-          data: {
-            name: fields.name,
-            privileges: fields.privileges as Privileges[]
-          }
+          data
         });
         return role;
-      } else {
-        throw new GraphQLError(`Error thrown 💥`, {
-          extensions: {
-            code: 'BAD_REQUEST'
-          }
-        });
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return handlePrismaError(error, (code) => {
+            if (code === 'P2002') {
+              return 'یک نقش با این نام وجود دارد';
+            }
+          });
+        } else if (error instanceof zod.ZodError) {
+          return handleValidationError(error);
+        } else {
+          return unknownFailure;
+        }
       }
     },
-    roleUpdate: async function (root, { id, fields }, { prisma }) {
-      if (fields.name && fields.privileges.length > 0) {
+    roleUpdate: async function (root, { id, fields }, { prisma, zod }) {
+      const roleUpdateArgsSchema = roleArgsSchema.partial();
+      try {
+        const data = await parseAndAssert(roleUpdateArgsSchema, fields);
         const role = await prisma.role.update({
           where: {
-            id: id
+            id
           },
-          data: {
-            name: fields.name,
-            privileges: fields.privileges as Privileges[]
-          }
+          data
         });
         return role;
-      } else {
-        throw new GraphQLError(`Error thrown 💥`, {
-          extensions: {
-            code: 'BAD_REQUEST'
-          }
-        });
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return handlePrismaError(error, (code) => {
+            if (code === 'P2002') {
+              return 'یک نقش با این نام وجود دارد';
+            }
+          });
+        } else if (error instanceof zod.ZodError) {
+          return handleValidationError(error);
+        } else {
+          return unknownFailure;
+        }
       }
     },
-    roleDelete: async function (root, { id }, { prisma }) {
-      const role = await prisma.role.delete({
-        where: {
-          id: id
+    roleDelete: async (root, { id }, { prisma }) => {
+      try {
+        const role = await prisma.role.delete({
+          where: { id }
+        });
+        return role;
+      } catch (error) {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          return handlePrismaError(error, (code) => {
+            if (code === 'P2025') {
+              return 'نقش مورد نظر وجود ندارد';
+            }
+          });
+        } else {
+          return unknownFailure;
         }
-      });
-      return role;
+      }
     }
   }
 };

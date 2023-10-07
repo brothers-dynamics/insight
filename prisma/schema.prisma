@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -33,26 +34,27 @@ model User {
 
 model Role {
   id         Int          @id @default(autoincrement())
-  name       String
+  name       String       @unique
   privileges Privileges[]
 
   users            User[]
   relatedDocuments Document[]
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Document {
   id       Int          @id @default(autoincrement())
   code     String       @unique
-  author   User         @relation(name: "create", fields: [authorId], references: [id], onDelete: Restrict)
-  authorId Int
   type     documentType
   title    String       @unique
-  summery  String
-  latest   Int          @default(1)
+  summery  String       @default("")
+  author   User         @relation(name: "create", fields: [authorId], references: [id], onDelete: Restrict)
+  authorId Int
   domains  Role[]
   tags     Tag[]
+  archived Boolean      @default(false)
 
   bookmarkedBy User[]     @relation(name: "bookmark")
   readBy       User[]     @relation(name: "read")
@@ -60,44 +62,7 @@ model Document {
   referencedTo Document[] @relation(name: "reference")
   referencedBy Document[] @relation(name: "reference")
 
-  contents ContentUnion[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model ContentUnion {
-  id         Int          @id @default(autoincrement())
-  type       documentType
-  version    Int          @default(1)
-  Document   Document?    @relation(fields: [documentId], references: [id])
-  documentId Int?
-  Approval   Approval?
-
-  parent   ContentUnion? @relation(name: "inheritence")
-  child    ContentUnion? @relation(name: "inheritence", fields: [parentId], references: [id], onDelete: Restrict)
-  parentId Int?          @unique
-
-  // other types must be added here
-  knowledge   Knowledge?
-  knowledgeId Int?
-}
-
-model Knowledge {
-  contentUnion   ContentUnion @relation(fields: [contentUnionId], references: [id])
-  contentUnionId Int          @unique
-
-  content String
-
-  createdAt DateTime @default(now())
-}
-
-model Tag {
-  id          Int    @id @default(autoincrement())
-  name        String @unique
-  description String
-
-  documents Document[]
+  editions ContentUnion[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -111,6 +76,38 @@ model Approval {
   handler        User?          @relation(fields: [handlerId], references: [id], onDelete: Restrict)
   handlerId      Int?
   message        String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContentUnion {
+  id         Int          @id @default(autoincrement())
+  type       documentType
+  version    Int          @default(1)
+  document   Document?    @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  documentId Int?
+  approval   Approval?
+
+  // other types must be added here
+  knowledge Knowledge?
+}
+
+model Knowledge {
+  contentUnion   ContentUnion @relation(fields: [contentUnionId], references: [id], onDelete: Cascade)
+  contentUnionId Int          @unique
+
+  content String
+
+  createdAt DateTime @default(now())
+}
+
+model Tag {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+
+  documents Document[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

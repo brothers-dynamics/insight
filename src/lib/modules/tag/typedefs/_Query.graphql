@@ -1,0 +1,4 @@
+extend type Query {
+  tag(id: Int!): Tag
+  tags(skip: Int, take: Int): [Tag!]!
+}

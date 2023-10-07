@@ -1,15 +1,19 @@
 "graphql Query root"
 type Query {
   version: Version!
-  persian: Error
 }
 
 "contains information about the error that occurred"
 type Error {
   "error code as integer"
-  code: Int!
+  code: String!
   "error message as text (optional)"
   message: String
   "contains extra data about the error"
   extension: Object
+}
+
+"an array of errors"
+type ErrorList {
+  errors: [Error!]!
 }

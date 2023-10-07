@@ -1,0 +1,17 @@
+extend type Mutation {
+  tagCreate(fields: TagCreateFields!): TagMutationResponse
+  tagUpdate(id: Int!, fields: TagUpdateFields!): TagMutationResponse
+  tagDelete(id: Int!): TagMutationResponse
+}
+
+union TagMutationResponse = Tag | ErrorList
+
+input TagCreateFields {
+  name: String!
+  description: String!
+}
+
+input TagUpdateFields {
+  name: String
+  description: String
+}

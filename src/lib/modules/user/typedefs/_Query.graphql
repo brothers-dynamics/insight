@@ -1,3 +1,6 @@
 extend type Query {
   user(id: Int!): User
+  users(skip: Int, take: Int): [User!]!
+  searchByUsername(query: String!, skip: Int, take: Int): [User!]!
+  searchByFullName(query: String!, skip: Int, take: Int): [User!]!
 }

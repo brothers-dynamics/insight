@@ -1,0 +1,12 @@
+type Knowledge {
+  type: DocumentType!
+  version: Int!
+  document: Document
+  approval: Approval
+  content: String!
+
+  parent: Knowledge
+  child: Knowledge
+
+  createdAt: DateTime!
+}

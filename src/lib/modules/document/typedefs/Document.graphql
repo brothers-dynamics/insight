@@ -1,0 +1,23 @@
+type Document {
+  id: Int!
+  code: String!
+  title: String!
+  summery: String!
+  type: DocumentType!
+  author: User
+  domains: [Role!]
+  tags: [Tag!]
+  archived: Boolean!
+
+  bookmarkedBy: [User!]
+  readBy: [User!]
+  likedBy: [User!]
+  referencedTo: [Document!]
+  referencedBy: [Document!]
+
+  latest: DocumentContentType
+  editions: [DocumentContentType!]
+
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

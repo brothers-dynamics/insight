@@ -1,0 +1,11 @@
+query Tags {
+  tags {
+    id
+    name
+    description
+    documents {
+      id
+    }
+    createdAt
+  }
+}
