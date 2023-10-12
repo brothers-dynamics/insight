@@ -41,6 +41,10 @@ pre {
   @apply bg-accent-100;
 }
 
+.divide-y > * {
+  border-style: dashed;
+}
+
 /* md editor style customization */
 
 .CodeMirror {

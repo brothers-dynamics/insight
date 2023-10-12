@@ -9,15 +9,17 @@ export default class<T> {
   private store: Writable<T>;
   private _value: T;
 
+  public subscribe: (this: void, run: Subscriber<T>, invalidate?: Invalidator<T>) => Unsubscriber;
+  public update: (updater: (value: T) => T) => void;
+  public set: (newValue: T) => void;
+
   constructor(initialValue: T) {
     this.store = writable(initialValue);
     this.subscribe = this.store.subscribe;
     this.update = this.store.update;
+    this.set = this.store.set;
     this._value = initialValue;
   }
-
-  subscribe: (this: void, run: Subscriber<T>, invalidate?: Invalidator<T>) => Unsubscriber;
-  update: (updater: (value: T) => T) => void;
 
   get value(): T {
     return get(this.store);

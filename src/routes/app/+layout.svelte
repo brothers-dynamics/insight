@@ -18,9 +18,11 @@
   import CommandPaletteModal from '$lib/components/modals/CommandPaletteModal.svelte';
   import ShareModal from '$lib/components/modals/ShareModal.svelte';
   import LockDownModal from '$lib/components/modals/LockDownModal.svelte';
+  import TextPromptModal from '$lib/components/modals/TextPromptModal.svelte';
 
   import Notifications from '$lib/components/utils/Notifications.svelte';
   import NavbarItem from './_components/NavbarItem.svelte';
+  import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 
   /***********************
    * Implementation
@@ -39,7 +41,7 @@
   });
 </script>
 
-<div class="flex w-full shrink-0 flex-col justify-start bg-white/50 p-4 md:w-[300px]">
+<div class=" hidden w-full shrink-0 flex-col justify-start bg-white/50 p-4 sm:flex md:w-[300px]">
   <nav class="relative flex gap-2 rounded bg-white/70 py-6 pr-8 text-[13px] text-black shadow-sm">
     <div class="flex h-12 w-12 items-center justify-center rounded bg-accent-50 text-white">کط</div>
     <div class="flex flex-col gap-1">
@@ -81,6 +83,8 @@
   <CommandPaletteModal />
   <ShareModal />
   <LockDownModal />
+  <TextPromptModal />
+  <ConfirmModal />
   {#key data.url}
     <main
       class="min-h-[calc(100vh-4rem)]"

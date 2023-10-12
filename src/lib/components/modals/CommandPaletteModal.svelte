@@ -117,7 +117,7 @@
       label: 'کاربر: خروج',
       keybinding: ['Alt', 'Ctrl', 'L'],
       action: () => {
-        goto('/login');
+        goto('/app/login');
         CommandPaletteModalStateManagerStore.close();
       }
     }
@@ -150,10 +150,10 @@
         bind:this={input}
         bind:value={query}
       />
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col">
         {#each filteredCommands as command (command.id)}
           <button
-            class="group flex cursor-pointer gap-1 text-gray-600 outline-none"
+            class="group flex cursor-pointer gap-1 py-1.5 text-gray-600 outline-none"
             tabindex="0"
             on:click={command.action}
           >

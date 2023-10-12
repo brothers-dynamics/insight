@@ -31,7 +31,7 @@
 
 {#if $ShareModalStateManagerStore.visible}
   <div
-    class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-bl from-black/60 to-accent-100/60 p-4 backdrop-blur-sm"
+    class="fixed inset-0 z-[40] flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm"
     transition:fade={{ duration: 100 }}
   >
     <div

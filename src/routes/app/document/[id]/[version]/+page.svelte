@@ -76,7 +76,7 @@
           selected="4"
         />
         <div class="absolute right-0 hidden h-9 text-sm leading-9 text-gray-400 md:block">
-          شناسه : MAN-0001/4
+          شناسه : <span class="font-mono">MAN-0001/4</span>
         </div>
       </div>
       <article class="prose prose-sm !max-w-[160ch] pt-2 text-justify !leading-[1.8rem]">

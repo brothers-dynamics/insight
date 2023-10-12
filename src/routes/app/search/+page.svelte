@@ -25,7 +25,7 @@
    * Implementation
    ***********************/
 
-  let title = ''
+  let title = '';
 
   let config: any;
   $: if ($NavigationParams.config) {
@@ -37,10 +37,16 @@
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
-  <div class="flex h-fit shrink-0 flex-col gap-6 bg-white p-6 text-xs lg:min-w-[400px]">
+  <div class="flex h-fit shrink-0 flex-col gap-6 bg-white p-6 text-xs lg:w-[400px]">
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">عنوان سند</div>
+      </div>
+      <TextInput bind:value={title} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-1">
+        <div class="font-bold text-black/60">شناسه سند</div>
       </div>
       <TextInput bind:value={title} />
     </div>
@@ -116,7 +122,7 @@
     />
   </div>
   <div class="flex min-h-full grow flex-col gap-3 bg-white p-6">
-    <div class="border-b border-dashed p-2 text-sm">
+    <div class="border-b p-2 text-sm">
       <div class="flex gap-2">
         <SelectionButtonGroup
           class="pt-0"

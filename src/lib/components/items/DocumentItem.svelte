@@ -24,7 +24,7 @@
   <div class="flex gap-2">
     <Icon.ReaderOutline size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
-    <InlineDocument />
+    <span class="mr-auto shrink-0 font-mono text-[11px] text-black/40">MAN-00001</span>
   </div>
   <div>
     <div class="line-clamp-2 text-[#555]">
@@ -55,11 +55,11 @@
     </div>
   </div>
   <div class="relative mt-1 flex gap-3">
-    <a class="flex gap-1 hover:font-bold" href="/app/document/MAN-0001/1">
+    <a class="flex gap-1 opacity-60 hover:opacity-100" href="/app/document/MAN-0001/1">
       <Icon.ChevronForwardCircleOutline size="15" />
       <span class="text-[12px]">نمایش </span>
     </a>
-    <button class="flex gap-1 hover:font-bold">
+    <button class="flex gap-1 opacity-60 hover:opacity-100">
       {#if bookmarked}
         <Icon.Bookmark class="text-accent-100" size="15" />
         <span class="text-[12px]">برداشتن نشان</span>
@@ -69,7 +69,7 @@
       {/if}
     </button>
     <button
-      class="flex gap-1 hover:font-bold"
+      class="flex gap-1 opacity-60 hover:opacity-100"
       on:click={() => {
         ShareModalStateManagerStore.share('12');
       }}

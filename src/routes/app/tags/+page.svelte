@@ -30,7 +30,7 @@
     }
   `);
 
-  $: console.log($data)
+  $: console.log($data);
 </script>
 
 <div class="min-h-full bg-white p-3">

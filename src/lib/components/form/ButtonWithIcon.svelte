@@ -41,7 +41,7 @@
 </script>
 
 <button
-  class="flex h-10 cursor-pointer items-center gap-3 rounded bg-green-600/80 px-6 py-3 text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-70"
+  class="group relative flex h-10 cursor-pointer items-center gap-3 rounded bg-accent-60 px-7 py-3 text-xs text-white duration-75 disabled:cursor-not-allowed disabled:bg-gray-500 disabled:opacity-50 sm:w-fit"
   {disabled}
   use:overClass={clazz}
   on:click={click}
@@ -49,7 +49,8 @@
   {#if waiting}
     <Waiting size="8" />
   {:else}
-    <svelte:component this={icon} size={iconSize} />
+    <svelte:component this={icon} size={iconSize} class="group-active:scale-90" />
   {/if}
   <span class="text-sm">{label}</span>
+  <slot />
 </button>
