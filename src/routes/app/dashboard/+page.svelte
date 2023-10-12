@@ -7,9 +7,9 @@
   import * as Icon from 'svelte-ionicons';
 
   /* Components */
-  import Section from './_components/Section.svelte';
-  import ActivityItem from './_components/ActivityItem.svelte';
+  import Section from '$lib/components/layer/Section.svelte';
   import DocumentItem from '$lib/components/items/DocumentItem.svelte';
+  import ActivityItem from './_components/ActivityItem.svelte';
 </script>
 
 <div class="flex flex-wrap gap-4">

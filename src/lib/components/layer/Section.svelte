@@ -21,7 +21,7 @@
 </script>
 
 <div class="flex flex-col gap-4" use:overClass={clazz}>
-  <div class="flex w-fit gap-2 rounded bg-white p-2 pl-6">
+  <div class="flex w-fit gap-2 rounded bg-white p-2 pl-6 shadow-md">
     <svelte:component this={icon} size="23" />
     <span>{label}</span>
   </div>

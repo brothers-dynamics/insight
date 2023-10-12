@@ -32,7 +32,7 @@
   }
 </script>
 
-<div class="flex gap-2 py-2 text-xs" use:overClass={clazz}>
+<div class="flex gap-2 text-xs" use:overClass={clazz}>
   {#each options as option, i (i)}
     <button
       class="flex gap-1 rounded-lg px-2 py-1 text-black duration-75"

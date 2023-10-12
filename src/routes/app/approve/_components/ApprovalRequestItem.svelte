@@ -18,7 +18,7 @@
    ***********************/
 </script>
 
-<div class="flex flex-col gap-3 rounded-default bg-white px-3 py-2 text-xs">
+<div class="flex flex-col gap-3 rounded-xl bg-white px-3 py-2 text-xs shadow-lg">
   <div class="flex gap-2">
     <Icon.PersonOutline size="18" />
     <span class="relative top-px text-xs">کمیل طاهری</span>

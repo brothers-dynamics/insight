@@ -37,7 +37,9 @@
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
-  <div class="flex h-fit shrink-0 flex-col gap-6 bg-white p-6 text-xs lg:w-[400px]">
+  <div
+    class="flex h-fit shrink-0 flex-col gap-6 rounded-2xl bg-white p-6 text-xs shadow-lg lg:w-[400px]"
+  >
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
         <div class="font-bold text-black/60">عنوان سند</div>
@@ -116,13 +118,13 @@
       />
     </div>
     <ButtonWithIcon
-      class="w-fit bg-accent-60 px-5 py-2 hover:bg-accent-80"
+      class="w-fit bg-accent-60 px-5 hover:bg-accent-80"
       label="جستوجو"
       icon={Icon.SearchCircleOutline}
     />
   </div>
-  <div class="flex min-h-full grow flex-col gap-3 bg-white p-6">
-    <div class="border-b p-2 text-sm">
+  <div class="flex min-h-full grow flex-col gap-3 p-6 pt-0">
+    <div class="rounded-xl border-b bg-white p-2 text-sm shadow-lg">
       <div class="flex gap-2">
         <SelectionButtonGroup
           class="pt-0"
@@ -135,7 +137,7 @@
         />
       </div>
     </div>
-    <div class="relative flex flex-col divide-y">
+    <div class="relative flex flex-wrap gap-3">
       {#if false}
         <div
           class="absolute inset-0 z-10 flex min-h-[400px] items-center justify-center bg-white/70 backdrop-blur-sm"
@@ -143,25 +145,26 @@
           <Icon.CloudCircleOutline class="animate-pulse text-gray-700" size="40" />
         </div>
       {/if}
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
-      <DocumentItem />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
     </div>
-    <div class="-mb-2 mt-auto border-t border-dashed pt-4">
-      <SelectionButtonGroup
-        options={[
-          { label: '1', value: '1' },
-          { label: '2', value: '2' },
-          { label: '3', value: '3' },
-          { label: '4', value: '4' }
-        ]}
-        selected="1"
-      />
-    </div>
+    {#if true}
+      <div class="-mb-2 mt-auto border-t border-dashed pt-4">
+        <SelectionButtonGroup
+          options={[
+            { label: '1', value: '1' },
+            { label: '2', value: '2' },
+            { label: '3', value: '3' },
+            { label: '4', value: '4' }
+          ]}
+          selected="1"
+        />
+      </div>
+    {/if}
   </div>
 </div>

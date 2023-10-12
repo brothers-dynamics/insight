@@ -61,7 +61,7 @@
 </script>
 
 <div
-  class="relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-accent-10 p-2 sm:w-[calc((100%-0.5rem)/2)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
+  class="relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-white p-2 shadow-lg sm:w-[calc((100%-0.5rem)/2)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
   use:overClass={clazz}
 >
   <Icon.PricetagOutline size="100" class="absolute left-2 top-2 z-0 text-accent-5" />

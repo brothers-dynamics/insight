@@ -22,7 +22,7 @@
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
   <div class="flex w-full shrink-0 flex-col gap-3 text-xs xl:w-[400px]">
     <div
-      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-default bg-accent-70 p-3 px-5 text-white shadow-sm shadow-slate-700/10 duration-75 hover:scale-[1.015]"
+      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-accent-70 p-3 px-5 text-white shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >
       <div class="flex gap-2 text-sm">
         <Icon.DocumentTextOutline class="text-white" size="20" />
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div
-      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-default bg-white p-3 px-5 shadow-sm shadow-slate-700/10 duration-75 hover:scale-[1.015]"
+      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-white p-3 px-5 shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >
       <div class="flex gap-2 text-sm text-accent-70">
         <Icon.Book class="" size="20" />
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div
-      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-default bg-white p-3 px-5 shadow-sm shadow-slate-700/10 duration-75 hover:scale-[1.015]"
+      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-white p-3 px-5 shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >
       <div class="flex gap-2 text-sm text-accent-70">
         <Icon.PlayCircle class="" size="20" />
@@ -58,7 +58,7 @@
       </div>
     </div>
     <div
-      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-default bg-white p-3 px-5 shadow-sm shadow-slate-700/10 duration-75 hover:scale-[1.015]"
+      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-white p-3 px-5 shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >
       <div class="flex gap-2 text-sm text-accent-70">
         <Icon.Shield class="" size="20" />
@@ -70,7 +70,7 @@
       </div>
     </div>
     <div
-      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-default bg-white p-3 px-5 shadow-sm shadow-slate-700/10 duration-75 hover:scale-[1.015]"
+      class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-white p-3 px-5 shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >
       <div class="flex gap-2 text-sm text-accent-70">
         <Icon.Receipt class="" size="20" />
@@ -83,7 +83,7 @@
     </div>
   </div>
   <div
-    class="flex w-full grow flex-col gap-4 bg-white p-9 text-sm shadow-xl shadow-slate-700/10 xl:w-[calc(100%-25%-1.25rem)]"
+    class="flex w-full grow flex-col gap-4 rounded-xl bg-white p-9 text-sm shadow-xl shadow-slate-700/10 xl:w-[calc(100%-25%-1.25rem)]"
   >
     <div class="flex flex-col gap-4">
       <div class="flex flex-col gap-1">

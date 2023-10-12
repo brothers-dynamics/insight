@@ -6,22 +6,19 @@
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
-  /* Actions */
-  import { outClick } from '$lib/actions/userInteractions/CustomEvents';
-
   /* Components */
+  import Section from '$lib/components/layer/Section.svelte';
   import ApprovalRequestItem from './_components/ApprovalRequestItem.svelte';
   import RevisionRequestItem from './_components/RevisionRequestItem.svelte';
-  import ButtonWithIcon from '$lib/components/form/ButtonWithIcon.svelte';
-  import NotificationsStateManagerStore from '$lib/stores/utils/NotificationsStateManagerStore';
-
-  let revisionPopupState = true;
 </script>
 
 <div class="flex flex-col gap-2 lg:flex-row">
-  <div class="h-fit min-h-[calc(100vh-4rem)] w-full bg-white p-3 lg:w-[calc(50%-0.25rem)]">
-    <div class="mb-4 border-b pb-3 text-lg">اسناد در انتظار تایید</div>
-    <div class="flex flex-wrap gap-2 divide-y">
+  <Section
+    class="h-fit min-h-[calc(100vh-4rem)] w-full p-3 lg:w-[calc(50%-0.25rem)]"
+    label="اسناد در انتظار تایید"
+    icon={Icon.CheckboxOutline}
+  >
+    <div class="flex flex-wrap gap-3">
       <ApprovalRequestItem />
       <ApprovalRequestItem />
       <ApprovalRequestItem />
@@ -34,10 +31,13 @@
         >
       {/if}
     </div>
-  </div>
-  <div class="h-fit min-h-[calc(100vh-4rem)] w-full bg-white p-3 lg:w-[calc(50%-0.25rem)]">
-    <div class="mb-4 border-b pb-3 text-lg">اسناد در انتظار تصحیح</div>
-    <div class="flex flex-wrap gap-2 divide-y">
+  </Section>
+  <Section
+    class="h-fit min-h-[calc(100vh-4rem)] w-full p-3 lg:w-[calc(50%-0.25rem)]"
+    label="اسناد در انتظار تصحیح"
+    icon={Icon.CreateOutline}
+  >
+    <div class="flex flex-wrap gap-3">
       <RevisionRequestItem />
       <RevisionRequestItem />
       <RevisionRequestItem />
@@ -47,5 +47,5 @@
         >
       {/if}
     </div>
-  </div>
+  </Section>
 </div>

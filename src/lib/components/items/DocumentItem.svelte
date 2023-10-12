@@ -6,21 +6,24 @@
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
 
+  /* Actions */
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
   /* Stores */
   import ShareModalStateManagerStore from '$lib/stores/modalStateManagers/ShareModalStateManagerStore';
-
-  /* Components */
-  import InlineDocument from '$lib/components/utils/InlineDocument.svelte';
 
   /***********************
    * Implementation
    ***********************/
 
+  let clazz = '';
+  export { clazz as class };
+
   export let bookmarked = false;
   export let seen = false;
 </script>
 
-<div class="flex flex-col gap-3 rounded-default bg-white px-3 py-2 text-xs">
+<div class="flex flex-col gap-3 rounded-xl bg-white px-3 py-2 text-xs shadow-lg" use:overClass={clazz}>
   <div class="flex gap-2">
     <Icon.ReaderOutline size="18" />
     <span class="font-bold">راهنمای استفاده از سیستم</span>
