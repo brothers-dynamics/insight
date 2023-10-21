@@ -32,7 +32,7 @@
   const dispatch = createEventDispatcher();
 
   export let list: Array<{ label: string; value: string }>;
-  export let icon: ComponentType;
+  export let icon: ComponentType | undefined = undefined;
   let query: string = '';
 
   let state = States.CLOSED;
@@ -66,11 +66,18 @@
 >
   <div
     class="relative flex w-full divide-x divide-x-reverse overflow-hidden rounded-form-elements border bg-white"
+    class:border-b-transparent={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:border-t-transparent={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:z-20={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:rounded-b-none={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:rounded-t-none={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:shadow-lg={state === States.OPENED}
   >
-    <div class="flex aspect-square w-10 items-center justify-center">
-      <div class="jus flex" />
-      <svelte:component this={icon} size="15" />
-    </div>
+    {#if icon}
+      <div class="flex aspect-square w-10 items-center justify-center">
+        <svelte:component this={icon} size="15" />
+      </div>
+    {/if}
     <input
       class="w-full p-2 outline-none"
       type="text"
@@ -81,11 +88,11 @@
   </div>
   {#if state === States.OPENED}
     <div
-      class="absolute z-10 flex max-h-80 w-full flex-col overflow-hidden overflow-y-auto rounded-default border bg-white"
+      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-form-elements border bg-white shadow-lg"
       class:top-full={$direction === DropDirectionType.DOWN}
-      class:translate-y-2={$direction === DropDirectionType.DOWN}
       class:bottom-full={$direction === DropDirectionType.UP}
-      class:-translate-y-2={$direction === DropDirectionType.UP}
+      class:rounded-t-none={$direction === DropDirectionType.DOWN}
+      class:rounded-b-none={$direction === DropDirectionType.UP}
     >
       <div class="flex flex-col">
         {#each filteredList as item}
@@ -99,6 +106,8 @@
           >
             {item.label}
           </div>
+        {:else}
+          <span class="px-4 py-2 text-black/40">موردی یافت نشد.</span>
         {/each}
       </div>
     </div>

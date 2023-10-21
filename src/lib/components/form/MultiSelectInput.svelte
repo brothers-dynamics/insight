@@ -44,6 +44,9 @@
   function toggle(): void {
     state = Number(!state);
   }
+  function open(): void {
+    state = States.OPENED;
+  }
   function close(): void {
     state = States.CLOSED;
   }
@@ -62,11 +65,17 @@
   use:dropdownDirector={{ threshold: 300, direction }}
 >
   <button
-    class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
+    class="relative flex h-full w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
     on:click={toggle}
+    class:border-b-transparent={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:border-t-transparent={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:z-20={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:rounded-b-none={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:rounded-t-none={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:shadow-lg={state === States.OPENED}
   >
-    <svelte:component this={icon} size="15" />
-    <div class="flex items-center gap-3">
+    <svelte:component this={icon} class="h-full" size="15" />
+    <div class="flex h-full items-center gap-3">
       <div class="px-2 leading-4">
         {#if selected.length === list.length}
           همه
@@ -86,15 +95,15 @@
   </button>
   {#if state === States.OPENED}
     <div
-      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-default border bg-white py-2"
+      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-form-elements border bg-white shadow-lg"
       class:top-full={$direction === DropDirectionType.DOWN}
-      class:translate-y-2={$direction === DropDirectionType.DOWN}
       class:bottom-full={$direction === DropDirectionType.UP}
-      class:-translate-y-2={$direction === DropDirectionType.UP}
+      class:rounded-t-none={$direction === DropDirectionType.DOWN}
+      class:rounded-b-none={$direction === DropDirectionType.UP}
     >
       {#each list as item}
         <div
-          class="cursor-pointer px-4 py-3 hover:bg-black/5"
+          class="cursor-pointer px-2 py-3 hover:bg-black/5"
           role="button"
           tabindex="0"
           data-value={item.value}

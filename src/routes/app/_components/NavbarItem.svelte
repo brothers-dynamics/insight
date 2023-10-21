@@ -36,6 +36,6 @@
       {count}
     </div>
   {/if}
-  <svelte:component this={icon} size="18" tabindex="-1" />
+  <svelte:component this={icon} class="relative bottom-px" size="18" tabindex="-1" />
   <span>{label}</span>
 </a>

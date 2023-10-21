@@ -7,6 +7,9 @@
   import * as Icon from 'svelte-ionicons';
   import { twMerge } from 'tailwind-merge';
 
+  /* Actions */
+  import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
   /* Components */
   import PickWithSuggestInput from './PickWithSuggestInput.svelte';
 
@@ -20,15 +23,15 @@
   export let list: Array<{ label: string; value: string }>;
   export let tags: Array<{ label: string; value: string }> = [];
 
-  function removeTag() {
+  function removeTag(this: HTMLElement) {
     let selected = this.getAttribute('data-value') as string;
     tags = tags.filter((tag) => tag.value !== selected);
   }
 </script>
 
-<div class="flex flex-col gap-3 text-xs">
+<div class="flex flex-col gap-3 text-xs" use:overClass={clazz}>
   <PickWithSuggestInput
-    class={twMerge('w-full', clazz || '')}
+    class="w-full"
     icon={Icon.Pricetag}
     list={list.filter((item) => !Object.values(tags).includes(item))}
     on:pick={({ detail }) => {

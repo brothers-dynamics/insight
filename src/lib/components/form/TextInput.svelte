@@ -22,6 +22,7 @@
   <input
     class="w-full rounded-form-elements border border-black/10 px-4 py-2 text-xs outline-none"
     type="text"
+    tabindex="0"
     {placeholder}
     use:overClass={clazz}
     bind:value
@@ -30,6 +31,7 @@
   <input
     class="w-full rounded-form-elements border border-black/10 px-4 py-2 text-xs outline-none"
     type="password"
+    tabindex="0"
     {placeholder}
     use:overClass={clazz}
     bind:value

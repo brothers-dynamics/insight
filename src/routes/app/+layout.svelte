@@ -19,10 +19,10 @@
   import ShareModal from '$lib/components/modals/ShareModal.svelte';
   import LockDownModal from '$lib/components/modals/LockDownModal.svelte';
   import TextPromptModal from '$lib/components/modals/TextPromptModal.svelte';
-
+  import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
+  import BlankModal from '$lib/components/modals/BlankModal.svelte';
   import Notifications from '$lib/components/utils/Notifications.svelte';
   import NavbarItem from './_components/NavbarItem.svelte';
-  import ConfirmModal from '$lib/components/modals/ConfirmModal.svelte';
 
   /***********************
    * Implementation
@@ -85,6 +85,7 @@
   <LockDownModal />
   <TextPromptModal />
   <ConfirmModal />
+  <BlankModal />
   {#key data.url}
     <main
       class="min-h-[calc(100vh-4rem)]"

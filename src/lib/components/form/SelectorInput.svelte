@@ -4,6 +4,7 @@
    ***********************/
 
   /* Svelte built-in libraries */
+  import { writable } from 'svelte/store';
   import { createEventDispatcher, type ComponentType } from 'svelte';
 
   /* 3rd party libraries */
@@ -11,11 +12,17 @@
 
   /* Actions */
   import { outClick } from '$lib/actions/userInteractions/CustomEvents';
+  import {
+    dropdownDirector,
+    DropDirectionType
+  } from '$lib/actions/elementEnhancements/DropDownDirector';
   import { overClass } from '$lib/actions/elementEnhancements/OverClass';
 
   /***********************
    * Implementation
    ***********************/
+
+  let direction = writable(DropDirectionType.DOWN);
 
   let clazz = '';
   export { clazz as class };
@@ -34,6 +41,9 @@
   let state = States.CLOSED;
   function toggle(): void {
     state = Number(!state);
+  }
+  function open(): void {
+    state = States.OPENED;
   }
   function close(): void {
     state = States.CLOSED;
@@ -56,10 +66,17 @@
   use:outClick={() => {
     close();
   }}
+  use:dropdownDirector={{ threshold: 300, direction }}
 >
   <button
     class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
     on:click={toggle}
+    class:border-b-transparent={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:border-t-transparent={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:z-20={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:rounded-b-none={state === States.OPENED && $direction === DropDirectionType.DOWN}
+    class:rounded-t-none={state === States.OPENED && $direction === DropDirectionType.UP}
+    class:shadow-lg={state === States.OPENED}
   >
     <svelte:component this={icon} size="15" />
     <div class="flex items-center gap-3">
@@ -74,7 +91,11 @@
   </button>
   {#if state === States.OPENED}
     <div
-      class="absolute top-full z-10 flex w-full translate-y-2 flex-col overflow-hidden rounded-default border bg-white"
+      class="absolute z-10 flex w-full flex-col overflow-hidden rounded-form-elements border bg-white shadow-lg"
+      class:top-full={$direction === DropDirectionType.DOWN}
+      class:bottom-full={$direction === DropDirectionType.UP}
+      class:rounded-t-none={$direction === DropDirectionType.DOWN}
+      class:rounded-b-none={$direction === DropDirectionType.UP}
     >
       {#each list as item}
         <div

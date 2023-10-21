@@ -22,7 +22,7 @@
   <div class="text-xs">{caption}</div>
   {#if link.label !== ''}
     <a
-      class="flex cursor-pointer items-center rounded-default bg-gray-200 px-2 text-[10px] text-gray-600"
+      class="flex cursor-pointer items-center rounded-default bg-gray-200 px-2 font-mono text-[10px] text-gray-600"
       href={link.href}
     >
       ➲ {link.label}

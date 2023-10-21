@@ -123,7 +123,7 @@
       icon={Icon.SearchCircleOutline}
     />
   </div>
-  <div class="flex min-h-full grow flex-col gap-3 p-6 pt-0">
+  <div class="flex min-h-full grow flex-col gap-3 pt-0 sm:p-6">
     <div class="rounded-xl border-b bg-white p-2 text-sm shadow-lg">
       <div class="flex gap-2">
         <SelectionButtonGroup
@@ -154,7 +154,7 @@
       <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
     </div>
     {#if true}
-      <div class="-mb-2 mt-auto border-t border-dashed pt-4">
+      <div class="-mb-2 mt-auto border-t border-dashed pt-2">
         <SelectionButtonGroup
           options={[
             { label: '1', value: '1' },

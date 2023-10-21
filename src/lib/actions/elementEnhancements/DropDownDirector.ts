@@ -51,13 +51,11 @@ export function dropdownDirector(
 
   // Check the direction on mount and whenever the window is resized
   onMount(checkDirection);
-  const resizeObserver = new ResizeObserver(checkDirection);
-  resizeObserver.observe(node);
 
   // Clean up
   return {
     destroy() {
-      resizeObserver.unobserve(node);
+      // nothing to cleanup
     }
   };
 }
