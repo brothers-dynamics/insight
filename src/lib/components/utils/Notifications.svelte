@@ -21,7 +21,7 @@
 
   const colorSchema = {
     Success: 'bg-accent-80',
-    Error: 'bg-red-600'
+    Error: 'bg-red-600/80'
   };
 </script>
 

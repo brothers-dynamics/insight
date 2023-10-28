@@ -67,7 +67,7 @@
             setTimeout(() => {
               done();
               ConfirmModalStateManagerStore.confirm();
-            }, 2500);
+            }, 1000);
           }}
           disabled={Boolean(cooldown)}
         />

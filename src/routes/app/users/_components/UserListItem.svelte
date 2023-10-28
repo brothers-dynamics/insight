@@ -8,7 +8,7 @@
 </script>
 
 <div
-  class="relative flex w-full gap-3 rounded-xl bg-white p-4 pb-12 shadow-lg md:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-0.75rem*2)/3)] xl:w-[calc((100%-0.75rem*3)/4)]"
+  class="relative flex w-full gap-3 rounded-xl bg-white p-4 pb-12 shadow-lg md:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-0.75rem)/2)] xl:w-[calc((100%-0.75rem*2)/3)] 2xl:w-[calc((100%-0.75rem*3)/4)]"
 >
   <div class="h-12 w-12 shrink-0 rounded-2xl bg-accent-50 text-center leading-[3rem] text-white">
     کط

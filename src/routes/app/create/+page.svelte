@@ -20,7 +20,7 @@
 </script>
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
-  <div class="flex w-full shrink-0 flex-col gap-3 text-xs xl:w-[400px]">
+  <div class="flex flex-col gap-3 text-xs 2xl:w-[400px]">
     <div
       class="flex cursor-pointer flex-col gap-2 overflow-hidden rounded-xl bg-accent-70 p-3 px-5 text-white shadow-xl shadow-slate-700/10 duration-75 hover:scale-[1.015]"
     >

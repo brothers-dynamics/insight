@@ -19,7 +19,7 @@
 </script>
 
 <div
-  class="group relative flex w-full flex-col gap-3 rounded-xl bg-white p-2 px-3 text-xs shadow-lg lg:w-[calc((100%-0.75rem*1)/2)] xl:w-[calc((100%-0.75rem*2)/3)]"
+  class="group relative flex w-full flex-col gap-3 rounded-xl bg-white p-2 px-3 text-xs shadow-lg md:w-[calc((100%-0.75rem*1)/2)] xl:w-[calc((100%-0.75rem*1)/2)] 2xl:w-[calc((100%-0.75rem*2)/3)]"
   use:overClass={clazz}
 >
   <div class="flex gap-3">
@@ -27,7 +27,7 @@
       <Icon.WalletOutline size="15" />
       <span>برنامه نویس</span>
     </div>
-    <div class="mr-2 rounded bg-accent-60 px-2 text-[11px] text-white">8/15 کاربر فعال</div>
+    <div class="mr-2 rounded bg-accent-50 px-2 text-[11px] text-white">8/15 کاربر فعال</div>
     <div class="mr-auto flex gap-3">
       <Icon.TrashBinOutline
         class="cursor-pointer text-[#F44336] opacity-50 duration-75 hover:opacity-100"

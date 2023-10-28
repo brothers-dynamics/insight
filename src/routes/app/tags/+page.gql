@@ -1,5 +1,5 @@
-query Tags {
-  tags {
+query page @cache(policy: CacheAndNetwork, partial: false) {
+  tags @list(name: "TagsList") {
     id
     name
     description
@@ -7,5 +7,6 @@ query Tags {
       id
     }
     createdAt
+    updatedAt
   }
 }

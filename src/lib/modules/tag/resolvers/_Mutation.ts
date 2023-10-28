@@ -9,16 +9,6 @@ import type { TagModule } from '../$kitql/moduleTypes';
 import { tagArgsSchema } from '../validators/_Tag';
 
 export const resolvers: TagModule.Resolvers = {
-  // @ts-ignore
-  TagMutationResponse: {
-    // @ts-ignore
-    __resolveType(root) {
-      if (root.id) {
-        return 'Tag';
-      }
-      return 'ErrorList';
-    }
-  },
   Mutation: {
     tagCreate: async function (root, { fields }, { prisma, zod }) {
       const tagCreateArgsSchema = tagArgsSchema;
@@ -27,7 +17,10 @@ export const resolvers: TagModule.Resolvers = {
         const tag = await prisma.tag.create({
           data
         });
-        return tag;
+        return {
+          tag,
+          errors: []
+        };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -52,7 +45,10 @@ export const resolvers: TagModule.Resolvers = {
           },
           data
         });
-        return tag;
+        return {
+          tag,
+          errors: []
+        };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -72,7 +68,10 @@ export const resolvers: TagModule.Resolvers = {
         const tag = await prisma.tag.delete({
           where: { id }
         });
-        return tag;
+        return {
+          tag,
+          errors: []
+        };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {

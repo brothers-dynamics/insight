@@ -22,7 +22,7 @@
   <Section class="w-full " label="لیست کاربران" icon={Icon.PeopleCircleOutline}>
     <svelte:fragment slot="strip">
       <MultiSelectInput
-        class="mt-2 h-full w-64 rounded-xl shadow-lg sm:mt-0"
+        class="mt-2 h-full w-56 rounded-xl shadow-lg sm:mt-0"
         icon={Icon.WalletOutline}
         list={[
           { label: 'اپراتور', value: 'x2' },
@@ -34,7 +34,7 @@
         selected={['*']}
       />
       <TextInputWithIcon
-        class="h-full w-64 rounded-xl shadow-lg"
+        class="h-full w-56 rounded-xl shadow-lg"
         placeholder="جستوجوی نام کاربر"
         type="text"
         icon={Icon.PersonCircleOutline}

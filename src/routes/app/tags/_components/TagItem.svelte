@@ -3,13 +3,21 @@
    * Dependencies
    ***********************/
 
+  /* Svelte built-in libraries */
+  import { fade } from 'svelte/transition';
+
   /* 3rd party libraries */
   import type { Prisma } from '@prisma/client';
+  import { graphql } from '$houdini';
   import * as Icon from 'svelte-ionicons';
 
   /* Actions */
   import { goto } from '$app/navigation';
   import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /* Stores */
+  import ConfirmModalStateManagerStore from '$lib/stores/modalStateManagers/ConfirmModalStateManagerStore';
+  import NotificationsStateManagerStore from '$lib/stores/utils/NotificationsStateManagerStore';
 
   /***********************
    * Implementation
@@ -18,11 +26,9 @@
   let clazz = '';
   export { clazz as class };
 
-  export let data: Prisma.TagGetPayload<{
-    include: {
-      documents: true;
-    };
-  }>;
+  export let data: Prisma.TagGetPayload<boolean> & {
+    documents: number;
+  };
 
   let mode: 'Read' | 'Write' = 'Read';
   let newName = data.name;
@@ -39,14 +45,87 @@
     newName = data.name;
     newDescription = data.description;
   }
-  function updateTag() {
-    // todo
-    data.name = newName;
-    data.description = newDescription;
-    cancelWriting();
+  async function updateTag() {
+    const confirmation = await ConfirmModalStateManagerStore.prompt({
+      message: `آیا مطمعنید که میخواهید تگ '${data.name}' را ویرایش کنید ؟`,
+      label: 'ویرایش'
+    });
+    if (!confirmation) return;
+    const updateTag = graphql(`
+      mutation UpdateTag($id: Int!, $fields: TagUpdateFields!) {
+        tagUpdate(id: $id, fields: $fields) {
+          tag {
+            id
+          }
+          errors {
+            code
+            message
+            extension
+          }
+        }
+      }
+    `);
+    const result = await updateTag.mutate({
+      id: data.id,
+      fields: {
+        name: newName,
+        description: newDescription
+      }
+    });
+    if (result.data?.tagUpdate?.errors?.length === 0) {
+      NotificationsStateManagerStore.notify({
+        message: `تگ '${data.name}' با موفقیت ویرایش شد.`,
+        type: 'Success'
+      });
+      data.name = newName;
+      data.description = newDescription;
+      data = data;
+      cancelWriting();
+    } else {
+      if (!result.data?.tagUpdate?.errors[0]) return;
+      NotificationsStateManagerStore.notify({
+        message: result.data?.tagUpdate?.errors[0].message,
+        type: 'Error'
+      });
+    }
   }
-  function deleteTag() {
-    // todo
+  async function deleteTag() {
+    const confirmation = await ConfirmModalStateManagerStore.prompt({
+      message: `آیا مطمعنید که میخواهید تگ '${data.name}' را حذف کنید ؟`,
+      label: 'حذف',
+      accent: 'bg-red-500',
+      sensitive: true
+    });
+    if (!confirmation) return;
+    const deleteTag = graphql(`
+      mutation DeleteTag($id: Int!) {
+        tagDelete(id: $id) {
+          tag {
+            id
+            ...TagsList_remove
+          }
+          errors {
+            code
+            message
+          }
+        }
+      }
+    `);
+    const result = await deleteTag.mutate({
+      id: data.id
+    });
+    if (result.data?.tagDelete?.errors?.length === 0) {
+      NotificationsStateManagerStore.notify({
+        message: `تگ '${data.name}' با موفقیت حدف شد.`,
+        type: 'Success'
+      });
+    } else {
+      if (!result.data?.tagDelete?.errors[0]) return;
+      NotificationsStateManagerStore.notify({
+        message: result.data?.tagDelete?.errors[0].message,
+        type: 'Error'
+      });
+    }
   }
 
   function searchForTagDocuments() {
@@ -61,8 +140,9 @@
 </script>
 
 <div
-  class="relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-white p-2 shadow-lg sm:w-[calc((100%-0.5rem)/2)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
+  class="relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-white p-2 shadow-lg xs:w-[calc((100%-0.5rem*1)/2)] sm:w-[calc((100%-0.5rem*2)/3)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
   use:overClass={clazz}
+  transition:fade={{ duration: 300 }}
 >
   <Icon.PricetagOutline size="100" class="absolute left-2 top-2 z-0 text-accent-5" />
   <div
@@ -70,7 +150,7 @@
   >
     <button class="z-10 flex gap-1 text-xs" on:click={searchForTagDocuments}>
       <Icon.DocumentTextOutline class="relative top-px" size="12" />
-      <span>{data.documents.length + 12} سند </span>
+      <span>{data.documents} سند </span>
     </button>
   </div>
   <div class="z-[1] flex w-full flex-col justify-between gap-1">
@@ -85,7 +165,7 @@
       {:else}
         <span class="w-full">
           <input
-            class="w-full rounded-md bg-white/40 px-2 outline-none"
+            class="w-full rounded-md bg-black/10 px-2 opacity-70 outline-none"
             type="text"
             bind:value={newName}
             bind:this={newNameElement}
@@ -93,7 +173,7 @@
         </span>
         <span class="line-clamp-2 text-xs text-black/70">
           <input
-            class="h-6 w-full rounded-md bg-white/40 px-2 outline-none"
+            class="h-6 w-full rounded-md bg-black/10 px-2 opacity-70 outline-none"
             type="text"
             bind:value={newDescription}
           />

@@ -65,7 +65,7 @@
       <span class="text-[12px]">پیش نمایش </span>
     </a>
     <button
-      class="flex gap-1 text-blue-500 opacity-70 hover:opacity-100"
+      class="flex gap-1 text-accent-80 opacity-70 hover:opacity-100"
       on:click={() => {
         ConfirmModalStateManagerStore.prompt({
           message: 'آیا مطمعنید که میخواهید سند را تایید کنید ؟'

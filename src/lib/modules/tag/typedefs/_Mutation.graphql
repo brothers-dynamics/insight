@@ -4,7 +4,10 @@ extend type Mutation {
   tagDelete(id: Int!): TagMutationResponse
 }
 
-union TagMutationResponse = Tag | ErrorList
+type TagMutationResponse {
+  tag: Tag
+  errors: [Error!]!
+}
 
 input TagCreateFields {
   name: String!

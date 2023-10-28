@@ -15,6 +15,7 @@
   export let icon: ComponentType;
   export let path: string;
   export let count: number = 0;
+  export let disabled = false;
 
   export let active: boolean = false;
 
@@ -22,12 +23,13 @@
 </script>
 
 <a
-  class="relative flex h-6 cursor-pointer items-center gap-2 overflow-hidden rounded-3xl py-5 outline-none duration-75"
+  class="relative flex h-6 items-center gap-2 overflow-hidden rounded-3xl py-5 outline-none duration-75"
   class:text-gray-500={!active}
   class:text-accent-90={active}
   class:font-bold={active}
-  class:hover:text-black={!active}
-  href={'/app/' + path}
+  class:cursor-default={disabled}
+  class:hover:text-black={!active && !disabled}
+  href={!disabled ? '/app/' + path : ''}
 >
   {#if count}
     <div

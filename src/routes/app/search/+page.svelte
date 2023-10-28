@@ -38,7 +38,7 @@
 
 <div class="flex min-h-full flex-col gap-5 xl:flex-row">
   <div
-    class="flex h-fit shrink-0 flex-col gap-6 rounded-2xl bg-white p-6 text-xs shadow-lg lg:w-[400px]"
+    class="flex h-fit shrink-0 flex-col gap-6 rounded-2xl bg-white p-6 text-xs shadow-lg w-full xl:w-[400px]"
   >
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
@@ -123,7 +123,7 @@
       icon={Icon.SearchCircleOutline}
     />
   </div>
-  <div class="flex min-h-full grow flex-col gap-3 pt-0 sm:p-6">
+  <div class="flex min-h-full grow flex-col gap-3 pt-0">
     <div class="rounded-xl border-b bg-white p-2 text-sm shadow-lg">
       <div class="flex gap-2">
         <SelectionButtonGroup
@@ -145,13 +145,13 @@
           <Icon.CloudCircleOutline class="animate-pulse text-gray-700" size="40" />
         </div>
       {/if}
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
-      <DocumentItem class="w-full xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
+      <DocumentItem class="w-full lg:w-[calc(50%-0.75rem/2)] xl:w-full 2xl:w-[calc(50%-0.75rem/2)]" />
     </div>
     {#if true}
       <div class="-mb-2 mt-auto border-t border-dashed pt-2">

@@ -9,6 +9,9 @@ const config = {
     }
   },
   scalars: {
+    Object: {
+      type: 'Any'
+    },
     DateTime: {
       type: 'Date',
       unmarshal(val) {

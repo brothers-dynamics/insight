@@ -20,7 +20,7 @@
 </script>
 
 <button
-  class="group relative flex max-h-[112px] w-full cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-dashed border-accent-15 bg-shady p-9 pb-9 shadow-lg backdrop-blur-sm duration-75 hover:bg-accent-10 md:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-0.75rem*2)/3)] xl:w-[calc((100%-0.75rem*3)/4)]"
+  class="group relative flex max-h-[112px] w-full cursor-pointer items-center justify-center gap-3 rounded-xl border-2 border-dashed border-accent-15 bg-shady p-9 pb-9 shadow-lg backdrop-blur-sm duration-75 hover:bg-accent-10 md:w-[calc((100%-0.75rem)/2)] lg:w-[calc((100%-0.75rem)/2)] xl:w-[calc((100%-0.75rem*2)/3)] 2xl:w-[calc((100%-0.75rem*3)/4)]"
   on:click={click}
 >
   <div

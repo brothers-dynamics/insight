@@ -21,12 +21,12 @@
 </script>
 
 <div class="flex flex-col gap-4" use:overClass={clazz}>
-  <div class="flex flex-col flex-wrap lg:h-[40px] lg:flex-row">
+  <div class="flex flex-col flex-wrap md:flex-row md:items-end lg:h-[40px]">
     <div class="flex gap-2 rounded bg-white p-2 pl-6 shadow-md lg:w-fit">
       <svelte:component this={icon} size="23" />
       <span>{label}</span>
     </div>
-    <div class="flex flex-col flex-wrap gap-2 lg:mr-auto lg:mt-0 lg:h-full lg:flex-row">
+    <div class="mt-3 flex flex-col flex-wrap gap-2 md:mr-auto md:flex-row lg:mt-0 lg:h-full">
       <slot name="strip" />
     </div>
   </div>

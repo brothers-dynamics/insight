@@ -12,6 +12,6 @@ export const tagArgsSchema = zod.object({
 
   description: zod
     .string()
-    .max(500, { message: 'نام تگ باید کمتر از 500 حرف باشد' })
+    .max(500, { message: 'توضیحات تگ باید کمتر از 500 حرف باشد' })
     .nonempty({ message: 'توضیحات تگ الزامی است' })
 });

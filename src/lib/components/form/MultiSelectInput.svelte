@@ -74,9 +74,9 @@
     class:rounded-t-none={state === States.OPENED && $direction === DropDirectionType.UP}
     class:shadow-lg={state === States.OPENED}
   >
-    <svelte:component this={icon} class="h-full" size="15" />
-    <div class="flex h-full items-center gap-3">
-      <div class="px-2 leading-4">
+    <svelte:component this={icon} class="h-full shrink-0" size="15" />
+    <div class="flex h-full w-full items-center gap-3">
+      <div class="line-clamp-1 px-2 text-right leading-4">
         {#if selected.length === list.length}
           همه
         {:else if selected.length === 0}
@@ -86,9 +86,7 @@
         {/if}
       </div>
       <Icon.ChevronBack
-        class="absolute left-2 top-1/2 -translate-y-1/2  duration-100 {state === States.OPENED
-          ? '-rotate-90'
-          : ''}"
+        class="mr-auto shrink-0 duration-100 {state === States.OPENED ? '-rotate-90' : ''}"
         size="13"
       />
     </div>

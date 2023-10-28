@@ -1,6 +1,7 @@
 {
   "cSpell.words": [
     "Chatbubble",
+    "ckeditor",
     "clazz",
     "cooldown",
     "firstname",
@@ -17,6 +18,7 @@
     "typedefs",
     "unmarshal",
     "Unsubscriber",
-    "Vazir"
+    "Vazir",
+    "xstate"
   ]
 }

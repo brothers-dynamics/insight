@@ -7,8 +7,8 @@ type Query {
 type Error {
   "error code as integer"
   code: String!
-  "error message as text (optional)"
-  message: String
+  "error message as text"
+  message: String!
   "contains extra data about the error"
   extension: Object
 }

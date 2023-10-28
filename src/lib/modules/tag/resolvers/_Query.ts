@@ -29,7 +29,12 @@ export const resolvers: TagModule.Resolvers = {
           take
         };
       }
-      const tags = await prisma.tag.findMany(selection);
+      const tags = await prisma.tag.findMany({
+        ...selection,
+        orderBy: {
+          createdAt: 'asc'
+        }
+      });
       return tags;
     }
   }
