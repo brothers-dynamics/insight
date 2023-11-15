@@ -9,6 +9,7 @@
 
   /* 3rd party libraries */
   import * as Icon from 'svelte-ionicons';
+  import type { Maybe } from 'houdini';
 
   /* Actions */
   import { outClick } from '$lib/actions/userInteractions/CustomEvents';
@@ -32,18 +33,20 @@
     CLOSED
   }
 
+  type Option = {
+    label: string;
+    value: string;
+  };
+
   const dispatch = createEventDispatcher();
 
-  export let list: Array<{ label: string; value: string }>;
+  export let list: Option[];
   export let selected: string;
-  export let icon: ComponentType;
+  export let icon: Maybe<ComponentType> = undefined;
 
   let state = States.CLOSED;
   function toggle(): void {
     state = Number(!state);
-  }
-  function open(): void {
-    state = States.OPENED;
   }
   function close(): void {
     state = States.CLOSED;
@@ -69,7 +72,7 @@
   use:dropdownDirector={{ threshold: 300, direction }}
 >
   <button
-    class="relative flex w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
+    class="relative flex min-h-[34px] w-full gap-2 divide-x divide-x-reverse rounded-form-elements border bg-white p-2"
     on:click={toggle}
     class:border-b-transparent={state === States.OPENED && $direction === DropDirectionType.DOWN}
     class:border-t-transparent={state === States.OPENED && $direction === DropDirectionType.UP}
@@ -78,9 +81,11 @@
     class:rounded-t-none={state === States.OPENED && $direction === DropDirectionType.UP}
     class:shadow-lg={state === States.OPENED}
   >
-    <svelte:component this={icon} size="15" />
+    {#if icon}
+      <svelte:component this={icon} size="15" />
+    {/if}
     <div class="flex items-center gap-3">
-      <div class="px-2 leading-4">{list.find((item) => item.value === selected)?.label}</div>
+      <div class="px-2 leading-4">{list.find((item) => item.value === selected)?.label || ''}</div>
       <Icon.ChevronBack
         class="absolute left-2 top-1/2 -translate-y-1/2  duration-100 {state === States.OPENED
           ? '-rotate-90'

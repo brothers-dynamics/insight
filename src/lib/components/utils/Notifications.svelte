@@ -26,7 +26,7 @@
 </script>
 
 <div
-  class="fixed right-0 top-2 z-[5] flex w-full flex-col gap-2 px-2 text-sm sm:bottom-5 sm:right-5 sm:top-auto sm:px-0"
+  class="fixed right-0 top-2 z-50 flex w-full flex-col gap-2 px-2 text-sm sm:bottom-5 sm:right-5 sm:top-auto sm:px-0"
 >
   {#each $NotificationsStateManagerStore.list as notification (notification)}
     <div

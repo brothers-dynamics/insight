@@ -135,21 +135,9 @@ enum ApprovalStatus {
 }
 
 enum Privileges {
-  ADMIN
-  CREATE_USER
-  UPDATE_USER
-  CREATE_KNOWLEDGE
-  APPROVE_KNOWLEDGE
-  CREATE_MANUAL
-  APPROVE_MANUAL
-  CREATE_PROCEDURE
-  APPROVE_PROCEDURE
-  CREATE_POLICY
-  APPROVE_POLICY
-  CREATE_TAG
-  UPDATE_TAG
-  CREATE_ROLE
-  UPDATE_ROLE
+  SUDO
+  USER_MANAGEMENT
+  DOCUMENT_MANAGEMENT
 }
 
 enum Action {
@@ -158,6 +146,7 @@ enum Action {
   DocumentCreate
   DocumentDelete
   DocumentApprove
+  DocumentReject
   DocumentRead
   UserCreate
   UserDelete

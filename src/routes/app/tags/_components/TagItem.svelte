@@ -7,7 +7,7 @@
   import { fade } from 'svelte/transition';
 
   /* 3rd party libraries */
-  import type { Prisma } from '@prisma/client';
+  import type { Tag } from '$graphql/$kitql/graphqlTypes';
   import { graphql } from '$houdini';
   import * as Icon from 'svelte-ionicons';
 
@@ -26,10 +26,9 @@
   let clazz = '';
   export { clazz as class };
 
-  export let data: Prisma.TagGetPayload<boolean> & {
+  export let data: Omit<Tag, 'documents'> & {
     documents: number;
   };
-
   let mode: 'Read' | 'Write' = 'Read';
   let newName = data.name;
   let newDescription = data.description;
@@ -140,7 +139,7 @@
 </script>
 
 <div
-  class="relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-white p-2 shadow-lg xs:w-[calc((100%-0.5rem*1)/2)] sm:w-[calc((100%-0.5rem*2)/3)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
+  class="xs:w-[calc((100%-0.5rem*1)/2)] relative flex h-24 w-full gap-3 overflow-hidden rounded-xl rounded-bl-none bg-white p-2 shadow-lg sm:w-[calc((100%-0.5rem*2)/3)] lg:w-[calc((100%-0.5rem*2)/3)] xl:w-[calc((100%-0.5rem*3)/4)]"
   use:overClass={clazz}
   transition:fade={{ duration: 300 }}
 >

@@ -9,16 +9,6 @@ import type { RoleModule } from '../$kitql/moduleTypes';
 import { roleArgsSchema } from '../validators/_Role';
 
 export const resolvers: RoleModule.Resolvers = {
-  // @ts-ignore
-  RoleMutationResponse: {
-    // @ts-ignore
-    __resolveType(root) {
-      if (root.id) {
-        return 'Role';
-      }
-      return 'ErrorList';
-    }
-  },
   Mutation: {
     roleCreate: async function (root, { fields }, { prisma, zod }) {
       const roleCreateArgsSchema = roleArgsSchema;
@@ -27,7 +17,7 @@ export const resolvers: RoleModule.Resolvers = {
         const role = await prisma.role.create({
           data
         });
-        return role;
+        return { role, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -52,7 +42,7 @@ export const resolvers: RoleModule.Resolvers = {
           },
           data
         });
-        return role;
+        return { role, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -72,7 +62,7 @@ export const resolvers: RoleModule.Resolvers = {
         const role = await prisma.role.delete({
           where: { id }
         });
-        return role;
+        return { role, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {

@@ -1,3 +1,4 @@
 extend type Query {
   role(id: Int!): Role
+  roles(skip: Int, take: Int): [Role!]!
 }

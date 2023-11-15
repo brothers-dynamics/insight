@@ -1,0 +1,13 @@
+query usersPageData @cache(policy: CacheAndNetwork, partial: false) {
+  users @list(name: "UsersList") {
+    id
+    firstname
+    lastname
+    active
+    role {
+      name
+    }
+    createdAt
+    updatedAt
+  }
+}

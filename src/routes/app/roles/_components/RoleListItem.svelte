@@ -3,12 +3,21 @@
    * Dependencies
    ***********************/
 
+  /* Svelte built-in libraries */
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+
   /* 3rd party libraries */
+  import { graphql } from '$houdini';
+  import type { Role } from '$graphql/$kitql/graphqlTypes';
   import * as Icon from 'svelte-ionicons';
 
   /* Actions */
-  import { goto } from '$app/navigation';
   import { overClass } from '$lib/actions/elementEnhancements/OverClass';
+
+  /* Stores */
+  import ConfirmModalStateManagerStore from '$lib/stores/modalStateManagers/ConfirmModalStateManagerStore';
+  import NotificationsStateManagerStore from '$lib/stores/utils/NotificationsStateManagerStore';
 
   /***********************
    * Implementation
@@ -16,6 +25,53 @@
 
   let clazz = '';
   export { clazz as class };
+
+  export let data: Omit<Role, 'users'> & {
+    users: number;
+  };
+
+  function callUpdateEvent() {
+    dispatch('update', { id: data.id, name: data.name, privileges: data.privileges });
+  }
+
+  async function deleteRole() {
+    const confirmation = await ConfirmModalStateManagerStore.prompt({
+      message: `آیا مطمعنید که میخواهید نقش '${data.name}' را حذف کنید ؟`,
+      label: 'حذف',
+      accent: 'bg-red-500',
+      sensitive: true
+    });
+    if (!confirmation) return;
+    const deleteRole = graphql(`
+      mutation DeleteRole($id: Int!) {
+        roleDelete(id: $id) {
+          role {
+            id
+            ...RolesList_remove
+          }
+          errors {
+            code
+            message
+          }
+        }
+      }
+    `);
+    const result = await deleteRole.mutate({
+      id: data.id
+    });
+    if (result.data?.roleDelete?.errors?.length === 0) {
+      NotificationsStateManagerStore.notify({
+        message: `تگ '${data.name}' با موفقیت حدف شد.`,
+        type: 'Success'
+      });
+    } else {
+      if (!result.data?.roleDelete?.errors[0]) return;
+      NotificationsStateManagerStore.notify({
+        message: result.data?.roleDelete?.errors[0].message,
+        type: 'Error'
+      });
+    }
+  }
 </script>
 
 <div
@@ -23,38 +79,40 @@
   use:overClass={clazz}
 >
   <div class="flex gap-3">
-    <div class="flex gap-1 font-bold">
+    <div class="flex gap-1.5 font-bold">
       <Icon.WalletOutline size="15" />
-      <span>برنامه نویس</span>
+      <span>{data.name}</span>
     </div>
-    <div class="mr-2 rounded bg-accent-50 px-2 text-[11px] text-white">8/15 کاربر فعال</div>
+    <div class=" rounded bg-accent-50 px-2 text-[11px] text-white">{data.users} کاربر فعال</div>
     <div class="mr-auto flex gap-3">
       <Icon.TrashBinOutline
         class="cursor-pointer text-[#F44336] opacity-50 duration-75 hover:opacity-100"
         size="13"
+        on:click={deleteRole}
       />
       <Icon.CreateOutline
         class="cursor-pointer  opacity-50 duration-75 hover:opacity-100"
         size="13"
+        on:click={callUpdateEvent}
       />
     </div>
   </div>
   <div class="flex w-full flex-wrap gap-2 border-t border-dashed py-2">
-    <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
-      <Icon.MedicalOutline class="relative top-px" size="12" />
-      <span>ساخت کاربر جدید</span>
-    </div>
-    <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
-      <Icon.MedicalOutline class="relative top-px" size="12" />
-      <span>ایجاد دانش</span>
-    </div>
-    <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
-      <Icon.MedicalOutline class="relative top-px" size="12" />
-      <span>ایجاد سیاست</span>
-    </div>
-    <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
-      <Icon.MedicalOutline class="relative top-px" size="12" />
-      <span>تایید دانش</span>
-    </div>
+    {#each data.privileges as privilege}
+      <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
+        <Icon.MedicalOutline class="relative top-px" size="12" />
+        <span
+          >{privilege
+            .split('_')
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+            .join(' ')}</span
+        >
+      </div>
+    {:else}
+      <div class="flex gap-1 rounded bg-black/5 px-2 py-0.5 text-[11px]">
+        <Icon.WineOutline class="relative top-px" size="12" />
+        <span>این نقش دارای دسترسی خاصی نمیباشد.</span>
+      </div>
+    {/each}
   </div>
 </div>

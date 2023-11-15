@@ -8,12 +8,12 @@ async function main() {
   await prisma.user.deleteMany({}); // use with caution.
   await prisma.role.deleteMany({}); // use with caution.
 
-  const amountOfUsers = 200;
+  const numberOfUsers = 200;
 
-  const users: Omit<User, 'id' | 'createdAt' | 'updatedAt'>[] = [];
+  const users: Omit<User, 'id' | 'createdAt' | 'updatedAt'| 'lastVisit'>[] = [];
 
-  for (let i = 0; i < amountOfUsers; i++) {
-    const user: Omit<User, 'id' | 'createdAt' | 'updatedAt'> = {
+  for (let i = 0; i < numberOfUsers; i++) {
+    const user: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'lastVisit'> = {
       username: faker.internet.userName(),
       firstname: faker.person.firstName(),
       lastname: faker.person.lastName(),
@@ -32,11 +32,11 @@ async function main() {
       data: [
         {
           name: 'Admin',
-          privileges: ['ADMIN']
+          privileges: ['SUDO']
         },
         {
           name: 'Operator',
-          privileges: ['CREATE_KNOWLEDGE']
+          privileges: ['DOCUMENT_MANAGEMENT']
         }
       ]
     });

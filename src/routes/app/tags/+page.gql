@@ -1,4 +1,4 @@
-query page @cache(policy: CacheAndNetwork, partial: false) {
+query tagsPageData @cache(policy: CacheAndNetwork, partial: false) {
   tags @list(name: "TagsList") {
     id
     name

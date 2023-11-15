@@ -9,16 +9,6 @@ import type { UserModule } from '../$kitql/moduleTypes';
 import { userArgsSchema } from '../validators/_User';
 
 export const resolvers: UserModule.Resolvers = {
-  // @ts-ignore
-  UserMutationResponse: {
-    // @ts-ignore
-    __resolveType(root) {
-      if (root.id) {
-        return 'User';
-      }
-      return 'ErrorList';
-    }
-  },
   Mutation: {
     userCreate: async (root, { fields }, { prisma, zod }) => {
       const userCreateArgsSchema = userArgsSchema;
@@ -27,7 +17,7 @@ export const resolvers: UserModule.Resolvers = {
         const user = await prisma.user.create({
           data
         });
-        return user;
+        return { user, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -53,7 +43,7 @@ export const resolvers: UserModule.Resolvers = {
           where: { id },
           data
         });
-        return user;
+        return { user, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {
@@ -77,7 +67,7 @@ export const resolvers: UserModule.Resolvers = {
         const user = await prisma.user.delete({
           where: { id }
         });
-        return user;
+        return { user, errors: [] };
       } catch (error) {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           return handlePrismaError(error, (code) => {

@@ -23,6 +23,22 @@ export const resolvers: RoleModule.Resolvers = {
         }
       });
       return role;
+    },
+    roles: async (root, { skip, take }, { prisma }) => {
+      let selection = {};
+      if (take && skip) {
+        selection = {
+          skip,
+          take
+        };
+      }
+      const roles = await prisma.role.findMany({
+        ...selection,
+        orderBy: {
+          createdAt: 'asc'
+        }
+      });
+      return roles;
     }
   }
 };

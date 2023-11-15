@@ -23,7 +23,7 @@
    ***********************/
 
   export let data: PageData;
-  $: ({ page } = data);
+  $: ({ tagsPageData } = data);
 
   let name: TextInput;
   let description: TextareaInput;
@@ -83,8 +83,8 @@
 <div class="min-h-full p-3">
   <Section class="h-fit" label="لیست تگ ها" icon={Icon.AppsOutline}>
     <div class="flex flex-wrap gap-2 text-sm">
-      {#if $page.data}
-        {#each $page.data.tags as tag (tag.id)}
+      {#if $tagsPageData.data}
+        {#each $tagsPageData.data.tags as tag (tag.id)}
           <TagItem
             data={{
               id: tag.id,

@@ -4,6 +4,8 @@
    ***********************/
 
   /* 3rd party libraries */
+  import { graphql, cache } from '$houdini';
+  import type { PageData } from './$houdini';
   import * as Icon from 'svelte-ionicons';
 
   /* Stores */
@@ -16,6 +18,14 @@
   import UserListItem from './_components/UserListItem.svelte';
   import CreateUserButton from './_components/CreateUserButton.svelte';
   import CreateUserForm from './_components/CreateUserForm.svelte';
+
+  /***********************
+   * Implementation
+   ***********************/
+
+  export let data: PageData;
+
+  $: ({ usersPageData } = data);
 </script>
 
 <div class="min-h-full p-3">

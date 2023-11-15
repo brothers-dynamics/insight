@@ -6,7 +6,10 @@ extend type Mutation {
   login(fields: UserCredentialFields): UserMutationResponse
 }
 
-union UserMutationResponse = User | ErrorList
+type UserMutationResponse {
+  user: User
+  errors: [Error!]!
+}
 
 input UserCredentialFields {
   username: String!

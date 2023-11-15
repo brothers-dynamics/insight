@@ -1,0 +1,12 @@
+query rolesPageData @cache(policy: CacheAndNetwork, partial: false) {
+  roles @list(name: "RolesList") {
+    id
+    name
+    privileges
+    users {
+      id
+    }
+    createdAt
+    updatedAt
+  }
+}

@@ -4,6 +4,7 @@ enum Action {
 	DocumentCreate
 	DocumentDelete
 	DocumentApprove
+	DocumentReject
 	DocumentRead
 	UserCreate
 	UserDelete

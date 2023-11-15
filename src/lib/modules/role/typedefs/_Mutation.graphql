@@ -4,7 +4,10 @@ extend type Mutation {
   roleDelete(id: Int!): RoleMutationResponse
 }
 
-union RoleMutationResponse = Role | ErrorList
+type RoleMutationResponse {
+  role: Role
+  errors: [Error!]!
+}
 
 input RoleCreateFields {
   name: String!

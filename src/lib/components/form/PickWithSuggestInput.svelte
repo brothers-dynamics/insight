@@ -29,9 +29,14 @@
     CLOSED
   }
 
+  type Option = {
+    label: string;
+    value: string;
+  };
+
   const dispatch = createEventDispatcher();
 
-  export let list: Array<{ label: string; value: string }>;
+  export let list: Option[] = [];
   export let icon: ComponentType | undefined = undefined;
   let query: string = '';
 

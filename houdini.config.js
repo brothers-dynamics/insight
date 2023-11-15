@@ -23,7 +23,8 @@ const config = {
         return date.toISOString();
       }
     }
-  }
+  },
+  acceptImperativeInstability: true
 };
 
 export default config;
